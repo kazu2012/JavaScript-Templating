@@ -14,7 +14,11 @@
     "Gulp",
     "Browserify",
     "JavaScript",
-    "Templates"
+    "Templates",
+    "Mustache", 
+    "jQuery Template", 
+    "Handlebars",
+    "Dust"
   ],
   "author": "Eric Njanga",
   "license": "ISC",
