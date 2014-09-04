@@ -1,0 +1,31 @@
+{
+  "name": "js-templating",
+  "version": "1.0.0",
+  "description": "Remake of Joe Marini \"JavaScript Templating\" course on Lynda.com. This remake integrate Gukp task runner and Browserify",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "?.git"
+  },
+  "keywords": [
+    "Gulp",
+    "Browserify",
+    "JavaScript",
+    "Templates"
+  ],
+  "author": "Eric Njanga",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-browserify": "^0.5.0",
+    "gulp-compass": "^1.3.1",
+    "gulp-concat": "^2.3.4",
+    "gulp-connect": "^2.0.6",
+    "gulp-util": "^3.0.1",
+    "jquery": "^2.1.1",
+    "mustache": "^0.8.2"
+  }
+}
