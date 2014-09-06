@@ -1,8 +1,7 @@
 
 
 (function(){
-	var $ 			= require('jquery'),
-		Mustache 	= require('mustache');
+	var $ 			= require('jquery');
 
 
 	console.log('******In script3.js ----------------')

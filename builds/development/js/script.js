@@ -1,31 +1,207 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
+//"bluemold": "^0.6.3",//Template engine based on jQuery template syntax
+module.exports =(function(){
+	var export_ 	= {},
+		$ 			= require('jquery');
+		//Mustache 	= require('mustache');
 
-(function(){
-	var $ 			= require('jquery'),
-		Mustache 	= require('mustache');
+
+	
 
 
-	console.log('In script1.js ----------------')
+	export_.renderTemplates = function (e) {
+
+		console.log('----------- export_.renderTemplates = function (e) { -----------' );
+
+
+
+        $("#container").loadTemplate( "template.html" , [{
+           "name" : "Henry Handsome",
+           "phone" : "+1-212-555-1234",
+           "email" : "pensive@example.com",
+           "title" : "Senior VP of Basketweaving",
+           "fulltime" : true
+        }, {
+           "name" : "Penelope Persistent",
+           "phone" : "+1-212-555-8000",
+           "email" : "truthful@example.com",
+           "title" : "Principal Understudy",
+           "fulltime" : false
+        }, {
+           "name" : "Sam Serendipity",
+           "phone" : "+1-212-555-9876",
+           "email" : "helpful@example.com",
+           "title" : "Chief Cook and Bottle Washer",
+           "fulltime" : true
+        }, {
+           "name" : "Tom Terriffic",
+           "phone" : "+1-212-555-0011",
+           "email" : "grumpy@example.com",
+           "title" : "Janitor",
+           "fulltime" : false
+        }], { isFile : true } );    
+
+		console.log( $("template.html").length );
+
+
+
+
+    };
+
+
+    export_.test = function(){
+    	console.log('this is just a test .......');
+    }
+
+    export_.alfa = function(){
+    	console.log('this is just a alfa .......');
+    }
+
+
+
+
+	return export_;
 })();
 
 
-(function(){
-	var $ 			= require('jquery'),
-		Mustache 	= require('mustache');
+
+// module.exports = {
+// 	alert:function(){
+// 		console.log('Alert......');
+// 	},
+// 	delta:function(){
+// 		alert('delta...............');
+// 	}
+// };
+
  
-	console.log('??? In script2.js ----------------')
-})();
+
+
+
+
+
+ 
+
+
 
 
 (function(){
 	var $ 			= require('jquery'),
-		Mustache 	= require('mustache');
+		//Mustache 	= require('mustache'),
+		renderer 	= require('./renderer.js');
+
+
+	//window.addEventListener("load", function(){
+	$('document').ready(function(){
+		renderer.renderTemplates();
+		
+	});
+
+		// renderer.alfa();
+		// console.log('---- renderer : ', renderer);
+		// console.log('------ loading templates ----------------');
+	//});
+
+$('#')
+ 
+	
+})();
+
+
+(function(){
+	var $ 			= require('jquery');
 
 
 	console.log('******In script3.js ----------------')
 })();
-},{"jquery":2,"mustache":3}],2:[function(require,module,exports){
+},{"./renderer.js":2,"jquery":3}],2:[function(require,module,exports){
+
+//"bluemold": "^0.6.3",//Template engine based on jQuery template syntax
+module.exports =(function(){
+	var export_ 	= {},
+		$ 			= require('jquery');
+		//Mustache 	= require('mustache');
+
+
+	
+
+
+	export_.renderTemplates = function (e) {
+
+		console.log('----------- export_.renderTemplates = function (e) { -----------' );
+
+
+
+        $("#container").loadTemplate( "template.html" , [{
+           "name" : "Henry Handsome",
+           "phone" : "+1-212-555-1234",
+           "email" : "pensive@example.com",
+           "title" : "Senior VP of Basketweaving",
+           "fulltime" : true
+        }, {
+           "name" : "Penelope Persistent",
+           "phone" : "+1-212-555-8000",
+           "email" : "truthful@example.com",
+           "title" : "Principal Understudy",
+           "fulltime" : false
+        }, {
+           "name" : "Sam Serendipity",
+           "phone" : "+1-212-555-9876",
+           "email" : "helpful@example.com",
+           "title" : "Chief Cook and Bottle Washer",
+           "fulltime" : true
+        }, {
+           "name" : "Tom Terriffic",
+           "phone" : "+1-212-555-0011",
+           "email" : "grumpy@example.com",
+           "title" : "Janitor",
+           "fulltime" : false
+        }], { isFile : true } );    
+
+		console.log( $("template.html").length );
+
+
+
+
+    };
+
+
+    export_.test = function(){
+    	console.log('this is just a test .......');
+    }
+
+    export_.alfa = function(){
+    	console.log('this is just a alfa .......');
+    }
+
+
+
+
+	return export_;
+})();
+
+
+
+// module.exports = {
+// 	alert:function(){
+// 		console.log('Alert......');
+// 	},
+// 	delta:function(){
+// 		alert('delta...............');
+// 	}
+// };
+
+ 
+
+
+
+
+
+ 
+
+
+},{"jquery":3}],3:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
@@ -8538,6 +8714,8 @@ jQuery.fn.extend({
 });
 
 
+
+
 jQuery.ajaxSettings.xhr = function() {
 	try {
 		return new XMLHttpRequest();
@@ -9213,580 +9391,556 @@ if ( typeof noGlobal === strundefined ) {
 
 
 
+
+
+
+
+//jquery.loadTemplate-1.4.4.js ..................................................
+//jquery.loadTemplate-1.4.4.js ..................................................
+//jquery.loadTemplate-1.4.4.js ..................................................
+(function ($) {
+    "use strict";
+    var templates = {},
+        queue = {},
+        formatters = {};
+
+    function loadTemplate(template, data, options) {
+        var $that = this,
+            $template,
+            isFile,
+            settings;
+
+        data = data || {};
+
+        settings = $.extend(true, {
+            // These are the defaults.
+            async: true,
+            overwriteCache: false,
+            complete: null,
+            success: null,
+            error: function () {
+                $(this).each(function () {
+                    $(this).html(settings.errorMessage);
+                });
+            },
+            errorMessage: "There was an error loading the template.",
+            paged: false,
+            pageNo: 1,
+            elemPerPage: 10,
+            append: false,
+            prepend: false,
+            beforeInsert: null,
+            afterInsert: null,
+            bindingOptions: {
+                ignoreUndefined: false,
+                ignoreNull: false,
+                ignoreEmptyString: false
+            }
+        }, options);
+
+        if ($.type(data) === "array") {
+            return processArray.call(this, template, data, settings);
+        }
+
+        if (!containsSlashes(template)) {
+            $template = $(template);
+            if (typeof template === 'string' && template.indexOf('#') === 0) {
+                settings.isFile = false;
+            }
+        }
+
+        isFile = settings.isFile || (typeof settings.isFile === "undefined" && (typeof $template === "undefined" || $template.length === 0));
+
+        if (isFile && !settings.overwriteCache && templates[template]) {
+            prepareTemplateFromCache(template, $that, data, settings);
+        } else if (isFile && !settings.overwriteCache && templates.hasOwnProperty(template)) {
+            addToQueue(template, $that, data, settings);
+        } else if (isFile) {
+            loadAndPrepareTemplate(template, $that, data, settings);
+        } else {
+            loadTemplateFromDocument($template, $that, data, settings);
+        }
+        return this;
+    }
+
+    function addTemplateFormatter(key, formatter) {
+        if (formatter) {
+            formatters[key] = formatter;
+        } else {
+            formatters = $.extend(formatters, key);
+        }
+    }
+
+    function containsSlashes(str) {
+        return typeof str === "string" && str.indexOf("/") > -1;
+    }
+
+    function processArray(template, data, settings) {
+        settings = settings || {};
+        var $that = this,
+            todo = data.length,
+            doPrepend = settings.prepend && !settings.append,
+            done = 0,
+            success = 0,
+            errored = false,
+            newOptions;
+
+        if (settings.paged) {
+            var startNo = (settings.pageNo - 1) * settings.elemPerPage;
+            data = data.slice(startNo, startNo + settings.elemPerPage);
+            todo = data.length;
+        }
+
+        newOptions = $.extend(
+            {},
+            settings,
+            {
+                complete: function () {
+                    if (this.html) {
+                        if (doPrepend) {
+                            $that.prepend(this.html());
+                        } else {
+                            $that.append(this.html());
+                        }
+                    }
+                    done++;
+                    if (done === todo || errored) {
+                        if (errored && settings && typeof settings.error === "function") {
+                            settings.error.call($that);
+                        }
+                        if (settings && typeof settings.complete === "function") {
+                            settings.complete();
+                        }
+                    }
+                },
+                success: function () {
+                    success++;
+                    if (success === todo) {
+                        if (settings && typeof settings.success === "function") {
+                            settings.success();
+                        }
+                    }
+                },
+                error: function () {
+                    errored = true;
+                }
+            }
+        );
+
+        if (!settings.append && !settings.prepend) {
+            $that.html("");
+        }
+
+        if (doPrepend) data.reverse();
+        $(data).each(function () {
+            var $div = $("<div/>");
+            loadTemplate.call($div, template, this, newOptions);
+            if (errored) {
+                return false;
+            }
+        });
+
+        return this;
+    }
+
+    function addToQueue(template, selection, data, settings) {
+        if (queue[template]) {
+            queue[template].push({ data: data, selection: selection, settings: settings });
+        } else {
+            queue[template] = [{ data: data, selection: selection, settings: settings}];
+        }
+    }
+
+    function prepareTemplateFromCache(template, selection, data, settings) {
+        var $templateContainer = templates[template].clone();
+
+        prepareTemplate.call(selection, $templateContainer, data, settings);
+        if (typeof settings.success === "function") {
+            settings.success();
+        }
+    }
+
+    function uniqueId() {
+        return new Date().getTime();
+    }
+
+    function urlAvoidCache(url) {
+        if (url.indexOf('?') !== -1) {
+            return url + "&_=" + uniqueId();
+        }
+        else {
+            return url + "?_=" + uniqueId();
+        }
+    }
+
+    function loadAndPrepareTemplate(template, selection, data, settings) {
+        var $templateContainer = $("<div/>");
+
+        templates[template] = null;
+        var templateUrl = template;
+        if (settings.overwriteCache) {
+            templateUrl = urlAvoidCache(templateUrl);
+        }
+        $.ajax({
+            url: templateUrl,
+            async: settings.async,
+            success: function (templateContent) {
+                $templateContainer.html(templateContent);
+                handleTemplateLoadingSuccess($templateContainer, template, selection, data, settings);
+            },
+            error: function () {
+                handleTemplateLoadingError(template, selection, data, settings);
+            }
+        });
+    }
+
+    function loadTemplateFromDocument($template, selection, data, settings) {
+        var $templateContainer = $("<div/>");
+
+        if ($template.is("script") || $template.is("template")) {
+            $template = $.parseHTML($.trim($template.html()));
+        }
+
+        $templateContainer.html($template);
+        prepareTemplate.call(selection, $templateContainer, data, settings);
+
+        if (typeof settings.success === "function") {
+            settings.success();
+        }
+    }
+
+    function prepareTemplate(template, data, settings) {
+        bindData(template, data, settings);
+
+        $(this).each(function () {
+            var $templateHtml = $(template.html());
+            if (settings.beforeInsert) {
+                settings.beforeInsert($templateHtml);
+            }
+            if (settings.append) {
+
+                $(this).append($templateHtml);
+            } else if (settings.prepend) {
+                $(this).prepend($templateHtml);
+            } else {
+                $(this).html($templateHtml);
+            }
+            if (settings.afterInsert) {
+                settings.afterInsert($templateHtml);
+            }
+        });
+
+        if (typeof settings.complete === "function") {
+            settings.complete.call($(this));
+        }
+    }
+
+    function handleTemplateLoadingError(template, selection, data, settings) {
+        var value;
+
+        if (typeof settings.error === "function") {
+            settings.error.call(selection);
+        }
+
+        $(queue[template]).each(function (key, value) {
+            if (typeof value.settings.error === "function") {
+                value.settings.error.call(value.selection);
+            }
+        });
+
+        if (typeof settings.complete === "function") {
+            settings.complete.call(selection);
+        }
+
+        while (queue[template] && (value = queue[template].shift())) {
+            if (typeof value.settings.complete === "function") {
+                value.settings.complete.call(value.selection);
+            }
+        }
+
+        if (typeof queue[template] !== 'undefined' && queue[template].length > 0) {
+            queue[template] = [];
+        }
+    }
+
+    function handleTemplateLoadingSuccess($templateContainer, template, selection, data, settings) {
+        var value;
+
+        templates[template] = $templateContainer.clone();
+        prepareTemplate.call(selection, $templateContainer, data, settings);
+
+        if (typeof settings.success === "function") {
+            settings.success.call(selection);
+        }
+
+        while (queue[template] && (value = queue[template].shift())) {
+            prepareTemplate.call(value.selection, templates[template].clone(), value.data, value.settings);
+            if (typeof value.settings.success === "function") {
+                value.settings.success.call(value.selection);
+            }
+        }
+    }
+
+    function bindData(template, data, settings) {
+        data = data || {};
+
+        processElements("data-content", template, data, settings, function ($elem, value) {
+            $elem.html(applyFormatters($elem, value, "content", settings));
+        });
+
+        processElements("data-content-append", template, data, settings, function ($elem, value) {
+            $elem.append(applyFormatters($elem, value, "content", settings));
+        });
+
+        processElements("data-content-prepend", template, data, settings, function ($elem, value) {
+            $elem.prepend(applyFormatters($elem, value, "content", settings));
+        });
+
+        processElements("data-content-text", template, data, settings, function ($elem, value) {
+            $elem.text(applyFormatters($elem, value, "content", settings));
+        });
+
+        processElements("data-src", template, data, settings, function ($elem, value) {
+            $elem.attr("src", applyFormatters($elem, value, "src", settings));
+        }, function ($elem) {
+            $elem.remove();
+        });
+        
+        processElements("data-href", template, data, settings, function ($elem, value) {
+            $elem.attr("href", applyFormatters($elem, value, "href", settings));
+        }, function ($elem) {
+            $elem.remove();
+        });
+
+        processElements("data-alt", template, data, settings, function ($elem, value) {
+            $elem.attr("alt", applyFormatters($elem, value, "alt", settings));
+        });
+
+        processElements("data-id", template, data, settings, function ($elem, value) {
+            $elem.attr("id", applyFormatters($elem, value, "id", settings));
+        });
+
+        processElements("data-value", template, data, settings, function ($elem, value) {
+            $elem.attr("value", applyFormatters($elem, value, "value", settings));
+        });
+
+        processElements("data-link", template, data, settings, function ($elem, value) {
+            var $linkElem = $("<a/>");
+            $linkElem.attr("href", applyFormatters($elem, value, "link", settings));
+            $linkElem.html($elem.html());
+            $elem.html($linkElem);
+        });
+
+        processElements("data-link-wrap", template, data, settings, function ($elem, value) {
+            var $linkElem = $("<a/>");
+            $linkElem.attr("href", applyFormatters($elem, value, "link-wrap", settings));
+            $elem.wrap($linkElem);
+        });
+
+        processElements("data-options", template, data, settings, function ($elem, value) {
+            $(value).each(function () {
+                var $option = $("<option/>");
+                $option.attr('value', this).text(this).appendTo($elem);
+            });
+        });
+
+        processAllElements(template, data, settings);
+    }
+
+    function processElements(attribute, template, data, settings, dataBindFunction, noDataFunction) {
+        $("[" + attribute + "]", template).each(function () {
+            var $this = $(this),
+                param = $this.attr(attribute),
+                value = getValue(data, param);
+
+            if (!valueIsAllowedByBindingOptions($this, value, settings)) {
+                $this.remove();
+                return;
+            }
+
+            $this.removeAttr(attribute);
+
+            if (typeof value !== 'undefined' && dataBindFunction) {
+                dataBindFunction($this, value);
+            } else if (noDataFunction) {
+                noDataFunction($this);
+            }
+        });
+        return;
+    }
+
+    function valueIsAllowedByBindingOptions(bindingOptionsContainer, value, settings) {
+
+        var bindingOptions = getBindingOptions(bindingOptionsContainer, settings);
+
+        if (bindingOptions.ignoreUndefined && typeof value === "undefined") {
+            return false;
+
+        } else if (bindingOptions.ignoreNull && value === null) {
+            return false;
+
+        } else if (bindingOptions.ignoreEmptyString && value === "") {
+            return false;
+
+        } else {
+            return true;
+        }
+    }
+
+    function getBindingOptions(bindingOptionsContainer, settings) {
+
+        var bindingOptions = {};
+
+        // binding options passed as template attribute, i.e. 'data-binding-options'
+        if (bindingOptionsContainer instanceof jQuery && bindingOptionsContainer.attr("data-binding-options")) {
+
+            bindingOptions = $.parseJSON(bindingOptionsContainer.attr("data-binding-options"));
+            bindingOptionsContainer.removeAttr("data-binding-options");
+
+            // binding options defined in a "data-template-bind" attribute
+        } else if (typeof bindingOptionsContainer === "object" && bindingOptionsContainer.hasOwnProperty('bindingOptions')) {
+            bindingOptions = bindingOptionsContainer.bindingOptions;
+        }
+
+        // extend general bindingOptions with specific settings
+        return $.extend({}, settings.bindingOptions, bindingOptions);
+    }
+
+    function processAllElements(template, data, settings) {
+        $("[data-template-bind]", template).each(function () {
+            var $this = $(this),
+                param = $.parseJSON($this.attr("data-template-bind"));
+
+            $this.removeAttr("data-template-bind");
+
+            $(param).each(function () {
+                var value;
+
+                if (typeof (this.value) === 'object') {
+                    value = getValue(data, this.value.data);
+                } else {
+                    value = getValue(data, this.value);
+                }
+                if (this.attribute) {
+
+                    if (!valueIsAllowedByBindingOptions(this, value, settings)) {
+                        $this.remove();
+                        return;
+                    }
+
+                    switch (this.attribute) {
+                        case "content":
+                            $this.html(applyDataBindFormatters($this, value, this));
+                            break;
+                        case "contentAppend":
+                            $this.append(applyDataBindFormatters($this, value, this));
+                            break;
+                        case "contentPrepend":
+                            $this.prepend(applyDataBindFormatters($this, value, this));
+                            break;
+                        case "contentText":
+                            $this.text(applyDataBindFormatters($this, value, this));
+                            break;
+                        case "options":
+                            var optionsData = this;
+                            $(value).each(function () {
+                                var $option = $("<option/>");
+                                $option
+                                    .attr('value', this[optionsData.value.value])
+                                    .text(applyDataBindFormatters($this, this[optionsData.value.content], optionsData))
+                                    .attr('selected', typeof this[optionsData.value.selected] == undefined ? false : this[optionsData.value.selected])
+                                    .appendTo($this);
+                            });
+                            break;
+                        default:
+                            $this.attr(this.attribute, applyDataBindFormatters($this, value, this));
+                    }
+                }
+            });
+        });
+    }
+
+    function applyDataBindFormatters($elem, value, data, settings) {
+        if (data.formatter && formatters[data.formatter]) {
+            return (function (formatterSettings) {
+                return formatters[data.formatter].call($elem, value, data.formatOptions, formatterSettings);
+            })(settings);
+        }
+        return value;
+    }
+
+    function getValue(data, param) {
+        if (param === "this") {
+            return data;
+        }
+        var paramParts = param.split('.'),
+            part,
+            value = data;
+
+        while ((part = paramParts.shift()) && typeof value !== "undefined" && value != null) {
+            value = value[part];
+        }
+
+        return value;
+    }
+
+    function applyFormatters($elem, value, attr, settings) {
+        var formatterTarget = $elem.attr("data-format-target"),
+            formatter;
+
+        if (formatterTarget === attr || (!formatterTarget && attr === "content")) {
+            formatter = $elem.attr("data-format");
+            if (formatter && typeof formatters[formatter] === "function") {
+                var formatOptions = $elem.attr("data-format-options");
+                return (function (formatterSettings) {
+                    return formatters[formatter].call($elem[0], value, formatOptions, $.extend({}, formatterSettings));
+                })(settings);
+            }
+        }
+
+        return value;
+    }
+    addTemplateFormatter("nestedTemplateFormatter", function (value, options, internalSettings) {
+        if (!options) {
+            return;
+        }
+
+        if (typeof options === "string" && options[0] === "{") {
+            options = $.parseJSON(options);
+        }
+
+        var parentElement = options.parentElement || "div";
+        var template = options.template || options;
+        
+        //If a parent is specified, return it; otherwise only return the generated children.
+        if(options.parentElement)
+            return $("<" + parentElement + "/>").loadTemplate(template, value, internalSettings);
+        else
+            return $("<" + parentElement + "/>").loadTemplate(template, value, internalSettings).children();
+    });
+    $.fn.loadTemplate = loadTemplate;
+    $.addTemplateFormatter = addTemplateFormatter;
+
+})(jQuery);
+//jquery.loadTemplate-1.4.4.js ..................................................
+//jquery.loadTemplate-1.4.4.js ..................................................
+//jquery.loadTemplate-1.4.4.js ..................................................
+
+
+
+
+
+
+
+
 return jQuery;
 
 }));
 
-},{}],3:[function(require,module,exports){
-/*!
- * mustache.js - Logic-less {{mustache}} templates with JavaScript
- * http://github.com/janl/mustache.js
- */
 
-/*global define: false*/
 
-(function (root, factory) {
-  if (typeof exports === "object" && exports) {
-    factory(exports); // CommonJS
-  } else {
-    var mustache = {};
-    factory(mustache);
-    if (typeof define === "function" && define.amd) {
-      define(mustache); // AMD
-    } else {
-      root.Mustache = mustache; // <script>
-    }
-  }
-}(this, function (mustache) {
 
-  // Workaround for https://issues.apache.org/jira/browse/COUCHDB-577
-  // See https://github.com/janl/mustache.js/issues/189
-  var RegExp_test = RegExp.prototype.test;
-  function testRegExp(re, string) {
-    return RegExp_test.call(re, string);
-  }
 
-  var nonSpaceRe = /\S/;
-  function isWhitespace(string) {
-    return !testRegExp(nonSpaceRe, string);
-  }
 
-  var Object_toString = Object.prototype.toString;
-  var isArray = Array.isArray || function (object) {
-    return Object_toString.call(object) === '[object Array]';
-  };
-
-  function isFunction(object) {
-    return typeof object === 'function';
-  }
-
-  function escapeRegExp(string) {
-    return string.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
-  }
-
-  var entityMap = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': '&quot;',
-    "'": '&#39;',
-    "/": '&#x2F;'
-  };
-
-  function escapeHtml(string) {
-    return String(string).replace(/[&<>"'\/]/g, function (s) {
-      return entityMap[s];
-    });
-  }
-
-  function escapeTags(tags) {
-    if (!isArray(tags) || tags.length !== 2) {
-      throw new Error('Invalid tags: ' + tags);
-    }
-
-    return [
-      new RegExp(escapeRegExp(tags[0]) + "\\s*"),
-      new RegExp("\\s*" + escapeRegExp(tags[1]))
-    ];
-  }
-
-  var whiteRe = /\s*/;
-  var spaceRe = /\s+/;
-  var equalsRe = /\s*=/;
-  var curlyRe = /\s*\}/;
-  var tagRe = /#|\^|\/|>|\{|&|=|!/;
-
-  /**
-   * Breaks up the given `template` string into a tree of tokens. If the `tags`
-   * argument is given here it must be an array with two string values: the
-   * opening and closing tags used in the template (e.g. [ "<%", "%>" ]). Of
-   * course, the default is to use mustaches (i.e. mustache.tags).
-   *
-   * A token is an array with at least 4 elements. The first element is the
-   * mustache symbol that was used inside the tag, e.g. "#" or "&". If the tag
-   * did not contain a symbol (i.e. {{myValue}}) this element is "name". For
-   * all text that appears outside a symbol this element is "text".
-   *
-   * The second element of a token is its "value". For mustache tags this is
-   * whatever else was inside the tag besides the opening symbol. For text tokens
-   * this is the text itself.
-   *
-   * The third and fourth elements of the token are the start and end indices,
-   * respectively, of the token in the original template.
-   *
-   * Tokens that are the root node of a subtree contain two more elements: 1) an
-   * array of tokens in the subtree and 2) the index in the original template at
-   * which the closing tag for that section begins.
-   */
-  function parseTemplate(template, tags) {
-    tags = tags || mustache.tags;
-    template = template || '';
-
-    if (typeof tags === 'string') {
-      tags = tags.split(spaceRe);
-    }
-
-    var tagRes = escapeTags(tags);
-    var scanner = new Scanner(template);
-
-    var sections = [];     // Stack to hold section tokens
-    var tokens = [];       // Buffer to hold the tokens
-    var spaces = [];       // Indices of whitespace tokens on the current line
-    var hasTag = false;    // Is there a {{tag}} on the current line?
-    var nonSpace = false;  // Is there a non-space char on the current line?
-
-    // Strips all whitespace tokens array for the current line
-    // if there was a {{#tag}} on it and otherwise only space.
-    function stripSpace() {
-      if (hasTag && !nonSpace) {
-        while (spaces.length) {
-          delete tokens[spaces.pop()];
-        }
-      } else {
-        spaces = [];
-      }
-
-      hasTag = false;
-      nonSpace = false;
-    }
-
-    var start, type, value, chr, token, openSection;
-    while (!scanner.eos()) {
-      start = scanner.pos;
-
-      // Match any text between tags.
-      value = scanner.scanUntil(tagRes[0]);
-      if (value) {
-        for (var i = 0, len = value.length; i < len; ++i) {
-          chr = value.charAt(i);
-
-          if (isWhitespace(chr)) {
-            spaces.push(tokens.length);
-          } else {
-            nonSpace = true;
-          }
-
-          tokens.push(['text', chr, start, start + 1]);
-          start += 1;
-
-          // Check for whitespace on the current line.
-          if (chr === '\n') {
-            stripSpace();
-          }
-        }
-      }
-
-      // Match the opening tag.
-      if (!scanner.scan(tagRes[0])) break;
-      hasTag = true;
-
-      // Get the tag type.
-      type = scanner.scan(tagRe) || 'name';
-      scanner.scan(whiteRe);
-
-      // Get the tag value.
-      if (type === '=') {
-        value = scanner.scanUntil(equalsRe);
-        scanner.scan(equalsRe);
-        scanner.scanUntil(tagRes[1]);
-      } else if (type === '{') {
-        value = scanner.scanUntil(new RegExp('\\s*' + escapeRegExp('}' + tags[1])));
-        scanner.scan(curlyRe);
-        scanner.scanUntil(tagRes[1]);
-        type = '&';
-      } else {
-        value = scanner.scanUntil(tagRes[1]);
-      }
-
-      // Match the closing tag.
-      if (!scanner.scan(tagRes[1])) {
-        throw new Error('Unclosed tag at ' + scanner.pos);
-      }
-
-      token = [ type, value, start, scanner.pos ];
-      tokens.push(token);
-
-      if (type === '#' || type === '^') {
-        sections.push(token);
-      } else if (type === '/') {
-        // Check section nesting.
-        openSection = sections.pop();
-
-        if (!openSection) {
-          throw new Error('Unopened section "' + value + '" at ' + start);
-        }
-        if (openSection[1] !== value) {
-          throw new Error('Unclosed section "' + openSection[1] + '" at ' + start);
-        }
-      } else if (type === 'name' || type === '{' || type === '&') {
-        nonSpace = true;
-      } else if (type === '=') {
-        // Set the tags for the next time around.
-        tagRes = escapeTags(tags = value.split(spaceRe));
-      }
-    }
-
-    // Make sure there are no open sections when we're done.
-    openSection = sections.pop();
-    if (openSection) {
-      throw new Error('Unclosed section "' + openSection[1] + '" at ' + scanner.pos);
-    }
-
-    return nestTokens(squashTokens(tokens));
-  }
-
-  /**
-   * Combines the values of consecutive text tokens in the given `tokens` array
-   * to a single token.
-   */
-  function squashTokens(tokens) {
-    var squashedTokens = [];
-
-    var token, lastToken;
-    for (var i = 0, len = tokens.length; i < len; ++i) {
-      token = tokens[i];
-
-      if (token) {
-        if (token[0] === 'text' && lastToken && lastToken[0] === 'text') {
-          lastToken[1] += token[1];
-          lastToken[3] = token[3];
-        } else {
-          squashedTokens.push(token);
-          lastToken = token;
-        }
-      }
-    }
-
-    return squashedTokens;
-  }
-
-  /**
-   * Forms the given array of `tokens` into a nested tree structure where
-   * tokens that represent a section have two additional items: 1) an array of
-   * all tokens that appear in that section and 2) the index in the original
-   * template that represents the end of that section.
-   */
-  function nestTokens(tokens) {
-    var nestedTokens = [];
-    var collector = nestedTokens;
-    var sections = [];
-
-    var token, section;
-    for (var i = 0, len = tokens.length; i < len; ++i) {
-      token = tokens[i];
-
-      switch (token[0]) {
-      case '#':
-      case '^':
-        collector.push(token);
-        sections.push(token);
-        collector = token[4] = [];
-        break;
-      case '/':
-        section = sections.pop();
-        section[5] = token[2];
-        collector = sections.length > 0 ? sections[sections.length - 1][4] : nestedTokens;
-        break;
-      default:
-        collector.push(token);
-      }
-    }
-
-    return nestedTokens;
-  }
-
-  /**
-   * A simple string scanner that is used by the template parser to find
-   * tokens in template strings.
-   */
-  function Scanner(string) {
-    this.string = string;
-    this.tail = string;
-    this.pos = 0;
-  }
-
-  /**
-   * Returns `true` if the tail is empty (end of string).
-   */
-  Scanner.prototype.eos = function () {
-    return this.tail === "";
-  };
-
-  /**
-   * Tries to match the given regular expression at the current position.
-   * Returns the matched text if it can match, the empty string otherwise.
-   */
-  Scanner.prototype.scan = function (re) {
-    var match = this.tail.match(re);
-
-    if (match && match.index === 0) {
-      var string = match[0];
-      this.tail = this.tail.substring(string.length);
-      this.pos += string.length;
-      return string;
-    }
-
-    return "";
-  };
-
-  /**
-   * Skips all text until the given regular expression can be matched. Returns
-   * the skipped string, which is the entire tail if no match can be made.
-   */
-  Scanner.prototype.scanUntil = function (re) {
-    var index = this.tail.search(re), match;
-
-    switch (index) {
-    case -1:
-      match = this.tail;
-      this.tail = "";
-      break;
-    case 0:
-      match = "";
-      break;
-    default:
-      match = this.tail.substring(0, index);
-      this.tail = this.tail.substring(index);
-    }
-
-    this.pos += match.length;
-
-    return match;
-  };
-
-  /**
-   * Represents a rendering context by wrapping a view object and
-   * maintaining a reference to the parent context.
-   */
-  function Context(view, parentContext) {
-    this.view = view == null ? {} : view;
-    this.cache = { '.': this.view };
-    this.parent = parentContext;
-  }
-
-  /**
-   * Creates a new context using the given view with this context
-   * as the parent.
-   */
-  Context.prototype.push = function (view) {
-    return new Context(view, this);
-  };
-
-  /**
-   * Returns the value of the given name in this context, traversing
-   * up the context hierarchy if the value is absent in this context's view.
-   */
-  Context.prototype.lookup = function (name) {
-    var value;
-    if (name in this.cache) {
-      value = this.cache[name];
-    } else {
-      var context = this;
-
-      while (context) {
-        if (name.indexOf('.') > 0) {
-          value = context.view;
-
-          var names = name.split('.'), i = 0;
-          while (value != null && i < names.length) {
-            value = value[names[i++]];
-          }
-        } else {
-          value = context.view[name];
-        }
-
-        if (value != null) break;
-
-        context = context.parent;
-      }
-
-      this.cache[name] = value;
-    }
-
-    if (isFunction(value)) {
-      value = value.call(this.view);
-    }
-
-    return value;
-  };
-
-  /**
-   * A Writer knows how to take a stream of tokens and render them to a
-   * string, given a context. It also maintains a cache of templates to
-   * avoid the need to parse the same template twice.
-   */
-  function Writer() {
-    this.cache = {};
-  }
-
-  /**
-   * Clears all cached templates in this writer.
-   */
-  Writer.prototype.clearCache = function () {
-    this.cache = {};
-  };
-
-  /**
-   * Parses and caches the given `template` and returns the array of tokens
-   * that is generated from the parse.
-   */
-  Writer.prototype.parse = function (template, tags) {
-    var cache = this.cache;
-    var tokens = cache[template];
-
-    if (tokens == null) {
-      tokens = cache[template] = parseTemplate(template, tags);
-    }
-
-    return tokens;
-  };
-
-  /**
-   * High-level method that is used to render the given `template` with
-   * the given `view`.
-   *
-   * The optional `partials` argument may be an object that contains the
-   * names and templates of partials that are used in the template. It may
-   * also be a function that is used to load partial templates on the fly
-   * that takes a single argument: the name of the partial.
-   */
-  Writer.prototype.render = function (template, view, partials) {
-    var tokens = this.parse(template);
-    var context = (view instanceof Context) ? view : new Context(view);
-    return this.renderTokens(tokens, context, partials, template);
-  };
-
-  /**
-   * Low-level method that renders the given array of `tokens` using
-   * the given `context` and `partials`.
-   *
-   * Note: The `originalTemplate` is only ever used to extract the portion
-   * of the original template that was contained in a higher-order section.
-   * If the template doesn't use higher-order sections, this argument may
-   * be omitted.
-   */
-  Writer.prototype.renderTokens = function (tokens, context, partials, originalTemplate) {
-    var buffer = '';
-
-    // This function is used to render an arbitrary template
-    // in the current context by higher-order sections.
-    var self = this;
-    function subRender(template) {
-      return self.render(template, context, partials);
-    }
-
-    var token, value;
-    for (var i = 0, len = tokens.length; i < len; ++i) {
-      token = tokens[i];
-
-      switch (token[0]) {
-      case '#':
-        value = context.lookup(token[1]);
-        if (!value) continue;
-
-        if (isArray(value)) {
-          for (var j = 0, jlen = value.length; j < jlen; ++j) {
-            buffer += this.renderTokens(token[4], context.push(value[j]), partials, originalTemplate);
-          }
-        } else if (typeof value === 'object' || typeof value === 'string') {
-          buffer += this.renderTokens(token[4], context.push(value), partials, originalTemplate);
-        } else if (isFunction(value)) {
-          if (typeof originalTemplate !== 'string') {
-            throw new Error('Cannot use higher-order sections without the original template');
-          }
-
-          // Extract the portion of the original template that the section contains.
-          value = value.call(context.view, originalTemplate.slice(token[3], token[5]), subRender);
-
-          if (value != null) buffer += value;
-        } else {
-          buffer += this.renderTokens(token[4], context, partials, originalTemplate);
-        }
-
-        break;
-      case '^':
-        value = context.lookup(token[1]);
-
-        // Use JavaScript's definition of falsy. Include empty arrays.
-        // See https://github.com/janl/mustache.js/issues/186
-        if (!value || (isArray(value) && value.length === 0)) {
-          buffer += this.renderTokens(token[4], context, partials, originalTemplate);
-        }
-
-        break;
-      case '>':
-        if (!partials) continue;
-        value = isFunction(partials) ? partials(token[1]) : partials[token[1]];
-        if (value != null) buffer += this.renderTokens(this.parse(value), context, partials, value);
-        break;
-      case '&':
-        value = context.lookup(token[1]);
-        if (value != null) buffer += value;
-        break;
-      case 'name':
-        value = context.lookup(token[1]);
-        if (value != null) buffer += mustache.escape(value);
-        break;
-      case 'text':
-        buffer += token[1];
-        break;
-      }
-    }
-
-    return buffer;
-  };
-
-  mustache.name = "mustache.js";
-  mustache.version = "0.8.1";
-  mustache.tags = [ "{{", "}}" ];
-
-  // All high-level mustache.* functions use this writer.
-  var defaultWriter = new Writer();
-
-  /**
-   * Clears all cached templates in the default writer.
-   */
-  mustache.clearCache = function () {
-    return defaultWriter.clearCache();
-  };
-
-  /**
-   * Parses and caches the given template in the default writer and returns the
-   * array of tokens it contains. Doing this ahead of time avoids the need to
-   * parse templates on the fly as they are rendered.
-   */
-  mustache.parse = function (template, tags) {
-    return defaultWriter.parse(template, tags);
-  };
-
-  /**
-   * Renders the `template` with the given `view` and `partials` using the
-   * default writer.
-   */
-  mustache.render = function (template, view, partials) {
-    return defaultWriter.render(template, view, partials);
-  };
-
-  // This is here for backwards compatibility with 0.4.x.
-  mustache.to_html = function (template, view, partials, send) {
-    var result = mustache.render(template, view, partials);
-
-    if (isFunction(send)) {
-      send(result);
-    } else {
-      return result;
-    }
-  };
-
-  // Export the escaping function so that the user may override it.
-  // See https://github.com/janl/mustache.js/issues/244
-  mustache.escape = escapeHtml;
-
-  // Export these mainly for testing, but also for advanced usage.
-  mustache.Scanner = Scanner;
-  mustache.Context = Context;
-  mustache.Writer = Writer;
-
-}));
 
 },{}]},{},[1])

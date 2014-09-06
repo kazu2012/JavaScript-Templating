@@ -24,7 +24,7 @@ var gulp 		= require('gulp'),
 
 //components sources ..............................................
 var sources = {
-	'js' 	: ['components/scripts/script1.js',
+	'js' 	: ['components/scripts/renderer.js',
 				'components/scripts/script2.js',
 				'components/scripts/script3.js'],
 	'sass' 	: [],

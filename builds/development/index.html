@@ -2,11 +2,36 @@
 	<head>
 		<title>JavaScript Templating</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="css/style.css" media="all">
+		<link rel="stylesheet" href="css/styles.css" media="all">
 	</head>
 	<body>
-		<h1>JavaScript Templating</h1>
-		<p>lorem ipsum 99999 hahahahahahah ??? ----</p>
+		
+		<!-- try to have these templates stored in files and coming from
+		a specific folder in the application -->
+		<!-- jQuery template specific -->
+		<script type="text/html" id="itemTemplate">
+            <div class="itemTemplateWrapper">
+	            <div data-content="name"></div>
+	            <div data-content="title"></div>
+	            <div data-content="email"></div>
+	            <div data-content="phone"></div>
+            </div>
+        </script>
+		<!-- jQuery template specific -->
+
+
+
+		<div class="global-frame"> 
+			<h1>JavaScript Templating</h1>
+			<p>lorem ipsum 99999 hahahahahahah ??? ----</p>
+
+			
+			<div id="container"><!-- container holding rendering results -->
+				
+			</div><!-- container holding rendering results -->
+		</div>
+
+
 		<script type="text/javascript" src="js/script.js"></script>
 	</body>
 </html>
