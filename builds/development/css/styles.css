@@ -11,12 +11,36 @@ h3{
 	margin-top: 0;
 	margin-bottom: 15px;
 }
+h3 small{
+	display: block;
+	font-size: 13pt;
+	color: green;
+}
+
+header#main-header ul {
+	margin:0;
+	padding:0;
+}
+header#main-header ul li{
+	display: inline-block;
+	padding: 10px;
+}
+header#main-header ul li a{
+	color: green;
+	font-size: 18pt;
+	display: inline-block;
+}
 
 .itemTemplateWrapper {
-	border: 1px solid gray;
+	border: 1px dashed gray;
 	padding: 5pt;
 	margin-top: 10px;
 	width: auto;
 	display: block;
+	background-color: #eee;
+}
+
+.frame{
+	margin-bottom:20px; padding:10px; border:1px solid #333;
 }
 

@@ -10,8 +10,8 @@
 	$('document').ready(function(){
 		jquery_templating.renderSimpleTemplate();
 		jquery_templating.renderFormatterTemplate();
-		// jquery_templating.renderPagingTemplate();
-		// jquery_templating.renderTemplates();
+		jquery_templating.renderPagingTemplate();
+		jquery_templating.renderBindingTemplates();
 
 	});
 

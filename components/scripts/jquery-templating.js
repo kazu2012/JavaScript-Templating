@@ -2,15 +2,11 @@
 //"bluemold": "^0.6.3",//Template engine based on jQuery template syntax
 module.exports =(function(){
 	var export_ 	= {},
-		$ 			= require('jquery');
-		//Mustache 	= require('mustache');
+		$ 			= require('jquery'); 
+ 
 
 
-
-
-
-
-	//Loading a simple external file
+	//Loading a simple external file ......
 	export_.renderSimpleTemplate = function(e){ 
 		$("#container1").loadTemplate( "template.html" , [{
            "name" : "Henry Handsome",
@@ -44,7 +40,7 @@ module.exports =(function(){
 
 
 
-	//Loading an external file with formater
+	//Loading an external file with formater ......
 	export_.renderFormatterTemplate = function(e){
  		$.addTemplateFormatter("UpperCaseFormatter", function(value, options) {
            return value.toUpperCase();
@@ -82,50 +78,22 @@ module.exports =(function(){
 
 
 
-
-	
-
-
-	export_.renderTemplates = function (e) {
-
-		getData();
- 
-        /* [1] DEFINING TEMPLATES -----------------------------------------------
-		//Loading an external file
-        
-        */   
-
-
-
-
-
-
-        /*
-        // [2] USING FORMATTERS --------------------------------------------------
-       	
-        */
-
-
-
-
-
-        // [3] BINDING OPTIONS AND PAGING -------------------------------------------
-        // [a] PAGING -------------------------------------------
-        //counters --------------
+	//Render template with pagination ......
+	export_.renderPagingTemplate = function (e) {
         var curPage = 1;
         var templateData = null;
 
-
-        function getData() {
+        //....  
+		function getData_() {
             $.getJSON("js/templateData.json", function(data) {
             	console.log('data = ', data);
                 templateData = data;
-                renderTemplates(templateData, curPage);
+                renderTemplates_(templateData, curPage);
             });
         } 
 
-        function renderTemplates(data, pageNo) {
-            $("#container").loadTemplate($("#tpl-paged"), data["employees"], 
+        function renderTemplates_(data, pageNo) {
+            $("#container3").loadTemplate($("#tpl-paged"), data["employees"], 
                     {paged: true, pageNo: pageNo, elemPerPage: 1});
         }
 
@@ -136,74 +104,72 @@ module.exports =(function(){
              
             document.querySelector("#prevPage").addEventListener("click", function (evt) {
                  if (curPage > 1) {
-                    renderTemplates(templateData, --curPage);
+                    renderTemplates_(templateData, --curPage);
                  }
             });
             document.querySelector("#nextPage").addEventListener("click", function (evt) {
                  if (curPage < 4) {
-                    renderTemplates(templateData, ++curPage);
+                    renderTemplates_(templateData, ++curPage);
                  }
             });
 
-            getData();
+            getData_();
         });
 
+	};
 
 
-        // [b] BINDING OPTIONS-------------------------------------------
-        // When making multiple calls to loadTemplate(), using the append or prepend options
-        // can add content to the template container instead of completely replacing it
-         function renderBindingTemplates() {
 
-            $("#container2").loadTemplate($("#tpl-binding"), {
+
+
+	// Render template with binding options ......
+	// When making multiple calls to loadTemplate(), using the append or prepend options
+    // can add content to the template container instead of completely replacing it
+	export_.renderBindingTemplates = function (e) {
+
+         
+        function renderTemplates_() {
+         	var containerID = '#container4';
+            $(containerID).loadTemplate($("#tpl-binding"), {
                 "name" : "John Doe",
                 "hometown" : "Anywhere, US"
-              }, 
-              {append: true, beforeInsert: onBefore, afterInsert: onAfter, complete: onComplete});
-            $("#container2").loadTemplate($("#tpl-binding"), {
+            }, 
+            //binding options ...
+            {append: true, beforeInsert: onBefore, afterInsert: onAfter, complete: onComplete});
+
+            $(containerID).loadTemplate($("#tpl-binding"), {
                 "name" : "Jane Doe",
                 "hometown" : "Anytown, US"
-              }, 
-              {append: true, beforeInsert: onBefore, afterInsert: onAfter, complete: onComplete});
-            $("#container2").loadTemplate($("#tpl-binding"), {
+            }, 
+            //binding options ...
+            {append: true, beforeInsert: onBefore, afterInsert: onAfter, complete: onComplete});
+
+            $(containerID).loadTemplate($("#tpl-binding"), {
                 "name" : "John Q Public",
                 "hometown" : "Pleasantville, US"
-              }, 
-              {append: true, beforeInsert: onBefore, afterInsert: onAfter, complete: onComplete});
+            }, 
+            //binding options ...
+            {append: true, beforeInsert: onBefore, afterInsert: onAfter, complete: onComplete}); 
+        }
 
 
-         }
-
-
-         //callback functions
+        //callback functions (just to let us know what happened)
         function onBefore(data) {
           console.log("Content about to be inserted: " + data);
-         }
-         function onAfter(data) {
+        }
+        function onAfter(data) {
           console.log("Content has been inserted: " + data);
-         }
-         function onComplete() {
+        }
+        function onComplete() {
           console.log("Operation complete");
-         }
+        }
 
 
 
-         window.addEventListener("load", function(e) {
-             renderBindingTemplates();
-         });
-
-
-
-    };
-
-
-    export_.test = function(){
-    	console.log('this is just a test .......');
-    }
-
-    export_.alfa = function(){
-    	console.log('this is just a alfa .......');
-    }
+        window.addEventListener("load", function(e) {
+             renderTemplates_();
+        }); 
+    }; 
 
 
 
