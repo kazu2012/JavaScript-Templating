@@ -3,17 +3,20 @@
 (function(){
 	var $ 			= require('jquery'),
 		//Mustache 	= require('mustache'),
-		renderer 	= require('./renderer.js');
+		jquery_templating 	= require('./jquery-templating.js');
 
 
 	//window.addEventListener("load", function(){
 	$('document').ready(function(){
-		renderer.renderTemplates();
-		
+		jquery_templating.renderSimpleTemplate();
+		jquery_templating.renderFormatterTemplate();
+		// jquery_templating.renderPagingTemplate();
+		// jquery_templating.renderTemplates();
+
 	});
 
-		// renderer.alfa();
-		// console.log('---- renderer : ', renderer);
+		// jquery_templating.alfa();
+		// console.log('---- jquery_templating : ', jquery_templating);
 		// console.log('------ loading templates ----------------');
 	//});
 

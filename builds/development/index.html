@@ -5,11 +5,9 @@
 		<link rel="stylesheet" href="css/styles.css" media="all">
 	</head>
 	<body>
-		
-		<!-- try to have these templates stored in files and coming from
-		a specific folder in the application -->
+		 
 		<!-- jQuery template specific -->
-		<script type="text/html" id="itemTemplate">
+		<script type="text/html" id="tpl-simple">
             <div class="itemTemplateWrapper">
 	            <div data-content="name"></div>
 	            <div data-content="title"></div>
@@ -20,16 +18,54 @@
 		<!-- jQuery template specific -->
 
 
+		
+        <h1>Using jQuery Template Data Paging</h1>
 
-		<div class="global-frame"> 
-			<h1>JavaScript Templating</h1>
-			<p>lorem ipsum 99999 hahahahahahah ??? ----</p>
+		<script type="text/html" id="tpl-paged">
+            <div class="itemTemplateWrapper">
+                <div data-content="name"></div>
+                <div data-content="title"></div>
+                <div data-content="email" data-link="email" data-format="EmailLink" data-format-target="link"></div>
+                <div data-content="phone"></div>
+            </div>
+        </script>
 
-			
-			<div id="container"><!-- container holding rendering results -->
-				
-			</div><!-- container holding rendering results -->
-		</div>
+
+        <script type="text/html" id="tpl-binding">
+            <div class="itemTemplateWrapper">
+                <div data-content="name"></div>
+                <div data-content="hometown"></div>
+            </div>
+        </script>
+
+ 
+
+
+		<div style="margin-bottom:20px; padding:10px; border:1px dashed blue;">
+	        <h3>This example uses a simple external template</h3>
+	        <div id="container1"></div>
+	    </div>  
+
+        <!-- This is the container where the templates will be instantiated -->
+		<div style="margin-bottom:20px; padding:10px; border:1px dashed blue;">
+	        <h3>This example uses a formatter</h3>
+	        <div id="container2"></div> 
+	    </div>  
+
+        <!-- This is the container where the templates will be instantiated -->
+		<div style="margin-bottom:20px; padding:10px; border:1px dashed blue;">
+	        <h3>This example uses the Paging Attributes features</h3>
+	        <div id="container3"></div>
+	        <button id="prevPage">Previous</button>
+	        <button id="nextPage">Next</button>
+	    </div>   
+
+
+		<div style="margin-bottom:20px; padding:10px; border:1px dashed blue;">
+	        <h3>This example uses the Binding Attributes features</h3>
+	        <div id="container4"></div>
+	    </div>   
+
 
 
 		<script type="text/javascript" src="js/script.js"></script>
