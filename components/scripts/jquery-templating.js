@@ -1,5 +1,5 @@
 
-//"bluemold": "^0.6.3",//Template engine based on jQuery template syntax
+
 module.exports =(function(){
 	var export_ 	= {},
 		$ 			= require('jquery'); 
@@ -85,8 +85,7 @@ module.exports =(function(){
 
         //....  
 		function getData_() {
-            $.getJSON("js/templateData.json", function(data) {
-            	console.log('data = ', data);
+            $.getJSON("js/templateData.json", function(data) { 
                 templateData = data;
                 renderTemplates_(templateData, curPage);
             });
@@ -176,19 +175,6 @@ module.exports =(function(){
 
 	return export_;
 })();
-
-
-
-// module.exports = {
-// 	alert:function(){
-// 		console.log('Alert......');
-// 	},
-// 	delta:function(){
-// 		alert('delta...............');
-// 	}
-// };
-
- 
 
 
 
