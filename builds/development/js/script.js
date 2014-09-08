@@ -283,6 +283,12 @@ module.exports=(function(){
         prodData.total = function() {
             return Math.round((this.price * 1.08) * 100) / 100;
         };
+        //Apply a certain style to a particular section of the template
+        prodData.decorate = function () {
+            return function(text, render) {
+            		return "<u>" + render(text) + "</u>";
+            };
+        };
 
         var result = Mustache.render(template, prodData );
         $("#container4").html(result);
@@ -618,6 +624,12 @@ module.exports=(function(){
         // define the function
         prodData.total = function() {
             return Math.round((this.price * 1.08) * 100) / 100;
+        };
+        //Apply a certain style to a particular section of the template
+        prodData.decorate = function () {
+            return function(text, render) {
+            		return "<u>" + render(text) + "</u>";
+            };
         };
 
         var result = Mustache.render(template, prodData );

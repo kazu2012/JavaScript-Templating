@@ -56,7 +56,12 @@
         <script type="text/template" id="tpl-mustache-functions">
             <div class="itemTemplateWrapper">
                 {{#items}}
-                <div><span>Item: </span><span>{{name}}</span></div>
+                <div>
+                	<span>Item: </span>
+                	{{#decorate}}
+                	<span>{{name}}</span>
+                	{{/decorate}}
+                </div>
                 <div><span>Price: </span><span>{{total}}</span></div>
                 {{/items}}
             </div>
