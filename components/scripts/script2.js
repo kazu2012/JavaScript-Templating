@@ -9,25 +9,28 @@
 
 	//window.addEventListener("load", function(){
 	$('document').ready(function(){
-		if($('body').hasClass('jquery-templating')){
-			jquery_templating.renderSimpleTemplate();
-			jquery_templating.renderFormatterTemplate();
-			jquery_templating.renderPagingTemplate();
-			jquery_templating.renderBindingTemplates(); 
-		}else if($('body').hasClass('mustache-templating')){
+		switch( $('body').attr('class') ){
+			case 'jquery-templating' :
+				jquery_templating.renderSimpleTemplate();
+				jquery_templating.renderFormatterTemplate();
+				jquery_templating.renderPagingTemplate();
+				jquery_templating.renderBindingTemplates(); 
+			break;
 
-
-			mustache_templating.renderSimpleTemplate();
+			case 'mustache-templating' :
+				mustache_templating.renderSimpleTemplate();
+				mustache_templating.renderSectionTemplate();
+				//render sections templates with conditions
+				mustache_templating.renderSection2Template();
+				mustache_templating.renderFunctionsTemplate();
+			break;
 		}
+		
+
 
 	});
 
-		// jquery_templating.alfa();
-		// console.log('---- jquery_templating : ', jquery_templating);
-		// console.log('------ loading templates ----------------');
-	//});
-
-$('#')
+		 
  
 	
 })();

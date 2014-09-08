@@ -27,6 +27,41 @@
             </div>
         </script>
 
+		<script type="text/template" id="tpl-mustache-sections">
+	        {{#employees}}
+	            <div class="itemTemplateWrapper">
+	                {{! This is a mustache comment and it is totally ignored }}
+	                <div>{{name}}</div>
+	                <div>{{title}}</div>
+	                <div>{{email}}</div>
+	                <div>{{phone}}</div>
+	            </div>
+            {{/employees}}
+        </script>
+
+        <script type="text/template" id="tpl-mustache-sections-conditions">
+            <div class="itemTemplateWrapper">
+                <div><span>Item: </span><span>{{item}}</span></div>
+                <div><span>Description: </span><span>{{description}}</span></div>
+                <div><span>Price: </span><span>{{price}}</span></div> 
+                {{#inStock}}
+                    <div><span>Quantity in stock: </span><span>{{quantity}}</span></div>
+                {{/inStock}}
+                {{^inStock}}
+                    <div><span>It appears we are out of stock on this item :-(</span></div>
+                {{/inStock}}
+            </div>
+        </script>
+
+        <script type="text/template" id="tpl-mustache-functions">
+            <div class="itemTemplateWrapper">
+                {{#items}}
+                <div><span>Item: </span><span>{{name}}</span></div>
+                <div><span>Price: </span><span>{{total}}</span></div>
+                {{/items}}
+            </div>
+        </script>
+
 		 
  
 
@@ -34,6 +69,24 @@
 		<div class="frame">
 	        <h3>Simple template</h3>
 	        <div id="container1"></div>
+	    </div>  
+
+		<div class="frame">
+	        <h3>Template with sections</h3>
+	        <div id="container2"></div>
+	    </div>  
+
+		<div class="frame">
+	        <h3>Template with sections with conditions
+	        	<small>A good way to incorporate some basic conditional logic into the template</small>
+	        </h3>
+	        <div id="container3"></div>
+	    </div>  
+
+		<div class="frame">
+	        <h3>Template with functions 
+	        </h3>
+	        <div id="container4"></div>
 	    </div>  
          
 
