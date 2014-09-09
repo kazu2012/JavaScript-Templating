@@ -1,0 +1,75 @@
+<html>
+	<head>
+		<title>JavaScript Templating</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/styles.css" media="all">
+	</head>
+	<body class="handlebars_templating">
+		  
+		
+		<header id="main-header">
+			<ul>
+				<li><a href="jquery-tpl.html">jQuery Templating</a></li>
+				<li><a href="mustashe.html">Mustache Templating</a></li>
+				<li><a href="handlebars.html">Handlebars Templating</a></li> 
+				<li><a href="dust.html">Dust Templating</a></li>  
+			</ul>
+		</header>
+
+		
+        <h1>Using Mustache template engine</h1>
+
+		<script type="text/template" id="tpl-handlebars-simple">
+            <div class="itemTemplateWrapper">
+                <div><span>Item: </span><span>{{item}}</span></div>
+                <div><span>Description: </span><span>{{description}}</span></div>
+                <div><span>Price: </span><span>{{price}}</span></div>
+            </div>
+        </script>
+
+		<script type="text/template" id="tpl-handlebars-sections">
+	         
+        </script>
+
+        <script type="text/template" id="tpl-handlebars-sections-conditions">
+            
+        </script>
+
+        <script type="text/template" id="tpl-handlebars-functions">
+            
+        </script>
+
+		 
+ 
+
+
+		<div class="frame">
+	        <h3>Simple template
+				<small>This example embeds the template directly in the source HTML</small>
+	        </h3>
+	        <div id="container1"></div>
+	    </div>  
+
+		<div class="frame">
+	        <h3>Template with sections</h3>
+	        <div id="container2"></div>
+	    </div>  
+
+		<div class="frame">
+	        <h3>Template with sections with conditions
+	        	<small>A good way to incorporate some basic conditional logic into the template</small>
+	        </h3>
+	        <div id="container3"></div>
+	    </div>  
+
+		<div class="frame">
+	        <h3>Template with functions 
+	        </h3>
+	        <div id="container4"></div>
+	    </div>  
+         
+
+
+		<script type="text/javascript" src="js/script.js"></script>
+	</body>
+</html>
