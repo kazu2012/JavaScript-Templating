@@ -27,8 +27,23 @@
             </div>
         </script>
 
-		<script type="text/template" id="tpl-handlebars-sections">
-	         
+		<script type="text/template" id="tpl-handlebars-conditions">
+	         {{#each employees}}
+            <div class="itemTemplateWrapper">
+                {{! This is a handlebars comment and it is totally ignored }}
+                <div>{{name}}</div>
+                <div>{{title}}</div>
+                <div>{{email}}</div>
+                <div>{{phone}}</div>
+
+                {{#if fulltime}}
+                    <div class="alert">Full-time employee</div>
+                {{else}}
+                    <div class="alert">Part-time employee</div>
+                {{/if}}
+
+            </div>
+            {{/each}}
         </script>
 
         <script type="text/template" id="tpl-handlebars-sections-conditions">
@@ -51,7 +66,9 @@
 	    </div>  
 
 		<div class="frame">
-	        <h3>Template with sections</h3>
+	        <h3>Conditianl and looping template
+	        	<small>"Full-time" or "Part-time" is mentionned, depending on the boolean value of the "fulltime" field</small>
+	        </h3>
 	        <div id="container2"></div>
 	    </div>  
 

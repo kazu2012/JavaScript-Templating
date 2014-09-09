@@ -29,6 +29,7 @@
 
 			case 'handlebars_templating' :
 				handlebars_templating.renderSimpleTemplate();
+				handlebars_templating.renderConditionalTemplate();
 			break;
 
 			case 'dust_templating' :

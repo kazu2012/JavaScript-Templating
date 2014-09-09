@@ -31,6 +31,10 @@ header#main-header ul li a{
 	display: inline-block;
 }
 
+.alert{
+	color: red;
+}
+
 .itemTemplateWrapper {
 	border: 1px dashed gray;
 	padding: 5pt;
