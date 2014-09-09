@@ -34,6 +34,9 @@ header#main-header ul li a{
 .alert{
 	color: red;
 }
+.highlight{
+	color: green;
+}
 
 .itemTemplateWrapper {
 	border: 1px dashed gray;

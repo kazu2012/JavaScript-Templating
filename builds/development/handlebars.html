@@ -46,8 +46,22 @@
             {{/each}}
         </script>
 
-        <script type="text/template" id="tpl-handlebars-sections-conditions">
-            
+        <script type="text/template" id="tpl-handlebars-helpers">
+            <div class="itemTemplateWrapper">
+                <div><span>Item: </span><span>{{item}}</span></div>
+                <div><span>Description: </span><span>{{description}}</span></div>
+
+	            {{#with data}}   {{! "with" helper locate all properties inside a given object }}
+	                <div><span>Price: </span><span>{{price}}</span></div>
+
+	                {{! "unless" helper allows an ouput only if a property has a false value }}
+	                {{#unless inStock}}   
+                        <div class="alert"><span>We are currently out of this item.</span></div>
+                    {{/unless}}
+	            {{/with}}
+
+                <div class="highlight">{{prodQuantity data}}</div>
+            </div>
         </script>
 
         <script type="text/template" id="tpl-handlebars-functions">
@@ -66,15 +80,15 @@
 	    </div>  
 
 		<div class="frame">
-	        <h3>Conditianl and looping template
+	        <h3>Conditinal and looping template
 	        	<small>"Full-time" or "Part-time" is mentionned, depending on the boolean value of the "fulltime" field</small>
 	        </h3>
 	        <div id="container2"></div>
 	    </div>  
 
 		<div class="frame">
-	        <h3>Template with sections with conditions
-	        	<small>A good way to incorporate some basic conditional logic into the template</small>
+	        <h3>Template with helpers
+	        	<small>...</small>
 	        </h3>
 	        <div id="container3"></div>
 	    </div>  

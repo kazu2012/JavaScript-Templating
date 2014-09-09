@@ -30,6 +30,7 @@
 			case 'handlebars_templating' :
 				handlebars_templating.renderSimpleTemplate();
 				handlebars_templating.renderConditionalTemplate();
+				handlebars_templating.renderHelpersTemplate();
 			break;
 
 			case 'dust_templating' :

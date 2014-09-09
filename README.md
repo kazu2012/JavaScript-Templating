@@ -1,7 +1,5 @@
 #JavaScript templating
 
-Remake of Joe Marini's JavaScript Templating course on lynda.com (JavaScript templating with Mustache, jQuery Template, Handlebars and Dust). With the exclusive use og Gulp and Browserify.
-
-##Note:
-
-Code has been detailed and specific pages have been created to insure a better understanding of possibilities offered by the four templating engines.
+Excellent case studies of the best use cases of four major templating engine in the industry: "jQuery Template", "Mustache", "Handlebars" and "Dust".  
+This is inspired from Joe Marini's JavaScript Templating course on lynda.com. 
+This remake has been done with Gulp task runner and Browserify.
