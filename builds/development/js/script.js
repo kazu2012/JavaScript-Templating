@@ -15,7 +15,7 @@ module.exports=(function(){
 
  
 })();
-},{"handlebars":22,"jquery":23}],2:[function(require,module,exports){
+},{"handlebars":24,"jquery":25}],2:[function(require,module,exports){
 
 
 module.exports =(function(){
@@ -322,9 +322,11 @@ module.exports=(function(){
 })();
 
 module.exports=(function(){
-	var $ 			= require('jquery'),
-		Handlebars 	= require('handlebars'),
-		export_ 	= {};
+	var $ 						= require('jquery'),
+		Handlebars 				= require('handlebars'),
+		//Handlebars runtime is used with precompiled templates
+		Handlebars_runntime 	= require('handlebars-runtime'),
+		export_ 				= {};
  
 
 
@@ -394,6 +396,7 @@ module.exports=(function(){
 	export_.renderHelpersTemplate = function(e){ 
 		$("document").ready(function() {
            // register the helper
+        		console.log('Handlebars = ', Handlebars);
            Handlebars.registerHelper("prodQuantity", function (prodData) {
                 if (prodData.quantity >= 100)
                   return "We currently have a large amount in stock.";
@@ -417,6 +420,26 @@ module.exports=(function(){
             });
 
             $("#container3").html(result);
+        });
+	};
+ 
+          
+         
+	// ......     
+	export_.renderPrecompiledTemplate = function(e){ 
+		$("document").ready(function() {
+        	var tpl_precompiled = require('.././tpl/precomp.js');
+        		console.log('Handlebars.templates = ', Handlebars.templates );
+
+        	var result = tpl_precompiled({
+                "item" : "Whisper 4000 in-home heater and dog walker",
+                "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
+                "price" : 895.99,
+                "inStock" : true,
+                "quantity" : 100
+            });
+
+            $("#container4").html(result);
         });
 	};
 
@@ -479,6 +502,7 @@ module.exports=(function(){
 				handlebars_templating.renderSimpleTemplate();
 				handlebars_templating.renderConditionalTemplate();
 				handlebars_templating.renderHelpersTemplate();
+				handlebars_templating.renderPrecompiledTemplate();
 			break;
 
 			case 'dust_templating' :
@@ -493,12 +517,14 @@ module.exports=(function(){
  
 	
 })();
-},{"./dust-templating.js":1,"./handlebars-templating.js":3,"./jquery-templating.js":4,"./mustache-templating.js":5,"handlebars":22,"jquery":23,"mustache":24}],3:[function(require,module,exports){
+},{".././tpl/precomp.js":6,"./dust-templating.js":1,"./handlebars-templating.js":3,"./jquery-templating.js":4,"./mustache-templating.js":5,"handlebars":24,"handlebars-runtime":8,"jquery":25,"mustache":26}],3:[function(require,module,exports){
 
 module.exports=(function(){
-	var $ 			= require('jquery'),
-		Handlebars 	= require('handlebars'),
-		export_ 	= {};
+	var $ 						= require('jquery'),
+		Handlebars 				= require('handlebars'),
+		//Handlebars runtime is used with precompiled templates
+		Handlebars_runntime 	= require('handlebars-runtime'),
+		export_ 				= {};
  
 
 
@@ -568,6 +594,7 @@ module.exports=(function(){
 	export_.renderHelpersTemplate = function(e){ 
 		$("document").ready(function() {
            // register the helper
+        		console.log('Handlebars = ', Handlebars);
            Handlebars.registerHelper("prodQuantity", function (prodData) {
                 if (prodData.quantity >= 100)
                   return "We currently have a large amount in stock.";
@@ -593,6 +620,26 @@ module.exports=(function(){
             $("#container3").html(result);
         });
 	};
+ 
+          
+         
+	// ......     
+	export_.renderPrecompiledTemplate = function(e){ 
+		$("document").ready(function() {
+        	var tpl_precompiled = require('.././tpl/precomp.js');
+        		console.log('Handlebars.templates = ', Handlebars.templates );
+
+        	var result = tpl_precompiled({
+                "item" : "Whisper 4000 in-home heater and dog walker",
+                "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
+                "price" : 895.99,
+                "inStock" : true,
+                "quantity" : 100
+            });
+
+            $("#container4").html(result);
+        });
+	};
 
 
 
@@ -604,7 +651,7 @@ module.exports=(function(){
 
  
 })();
-},{"handlebars":22,"jquery":23}],4:[function(require,module,exports){
+},{".././tpl/precomp.js":6,"handlebars":24,"handlebars-runtime":8,"jquery":25}],4:[function(require,module,exports){
 
 
 module.exports =(function(){
@@ -790,7 +837,7 @@ module.exports =(function(){
  
 
 
-},{"jquery":23}],5:[function(require,module,exports){
+},{"jquery":25}],5:[function(require,module,exports){
 
 module.exports=(function(){
 	var $ 			= require('jquery'),
@@ -910,9 +957,392 @@ module.exports=(function(){
 
  
 })();
-},{"jquery":23,"mustache":24}],6:[function(require,module,exports){
+},{"jquery":25,"mustache":26}],6:[function(require,module,exports){
+module.exports=(function() {
 
-},{}],7:[function(require,module,exports){
+	var Handlebars 				= require('handlebars');
+  	var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+	templates['precomp'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+	  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+	  return "<div class=\"itemTemplateWrapper\">\n    <div><span>Item: </span><span>"
+	    + escapeExpression(((helper = (helper = helpers.item || (depth0 != null ? depth0.item : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"item","hash":{},"data":data}) : helper)))
+	    + "</span></div>\n    <div><span>Description: </span><span>"
+	    + escapeExpression(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"description","hash":{},"data":data}) : helper)))
+	    + "</span></div>\n    <div><span>Price: </span><span>"
+	    + escapeExpression(((helper = (helper = helpers.price || (depth0 != null ? depth0.price : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"price","hash":{},"data":data}) : helper)))
+	    + "</span></div>\n</div>\n";
+	},"useData":true});
+     
+	return templates['precomp']; 
+})();
+},{"handlebars":24}],7:[function(require,module,exports){
+
+},{}],8:[function(require,module,exports){
+/*
+
+Copyright (C) 2011 by Yehuda Katz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+*/
+
+// lib/handlebars/browser-prefix.js
+var Handlebars = {};
+module.exports = Handlebars;
+
+(function(Handlebars, undefined) {
+;
+// lib/handlebars/base.js
+
+Handlebars.VERSION = "1.0.0";
+Handlebars.COMPILER_REVISION = 4;
+
+Handlebars.REVISION_CHANGES = {
+  1: '<= 1.0.rc.2', // 1.0.rc.2 is actually rev2 but doesn't report it
+  2: '== 1.0.0-rc.3',
+  3: '== 1.0.0-rc.4',
+  4: '>= 1.0.0'
+};
+
+Handlebars.helpers  = {};
+Handlebars.partials = {};
+
+var toString = Object.prototype.toString,
+    functionType = '[object Function]',
+    objectType = '[object Object]';
+
+Handlebars.registerHelper = function(name, fn, inverse) {
+  if (toString.call(name) === objectType) {
+    if (inverse || fn) { throw new Handlebars.Exception('Arg not supported with multiple helpers'); }
+    Handlebars.Utils.extend(this.helpers, name);
+  } else {
+    if (inverse) { fn.not = inverse; }
+    this.helpers[name] = fn;
+  }
+};
+
+Handlebars.registerPartial = function(name, str) {
+  if (toString.call(name) === objectType) {
+    Handlebars.Utils.extend(this.partials,  name);
+  } else {
+    this.partials[name] = str;
+  }
+};
+
+Handlebars.registerHelper('helperMissing', function(arg) {
+  if(arguments.length === 2) {
+    return undefined;
+  } else {
+    throw new Error("Missing helper: '" + arg + "'");
+  }
+});
+
+Handlebars.registerHelper('blockHelperMissing', function(context, options) {
+  var inverse = options.inverse || function() {}, fn = options.fn;
+
+  var type = toString.call(context);
+
+  if(type === functionType) { context = context.call(this); }
+
+  if(context === true) {
+    return fn(this);
+  } else if(context === false || context == null) {
+    return inverse(this);
+  } else if(type === "[object Array]") {
+    if(context.length > 0) {
+      return Handlebars.helpers.each(context, options);
+    } else {
+      return inverse(this);
+    }
+  } else {
+    return fn(context);
+  }
+});
+
+Handlebars.K = function() {};
+
+Handlebars.createFrame = Object.create || function(object) {
+  Handlebars.K.prototype = object;
+  var obj = new Handlebars.K();
+  Handlebars.K.prototype = null;
+  return obj;
+};
+
+Handlebars.logger = {
+  DEBUG: 0, INFO: 1, WARN: 2, ERROR: 3, level: 3,
+
+  methodMap: {0: 'debug', 1: 'info', 2: 'warn', 3: 'error'},
+
+  // can be overridden in the host environment
+  log: function(level, obj) {
+    if (Handlebars.logger.level <= level) {
+      var method = Handlebars.logger.methodMap[level];
+      if (typeof console !== 'undefined' && console[method]) {
+        console[method].call(console, obj);
+      }
+    }
+  }
+};
+
+Handlebars.log = function(level, obj) { Handlebars.logger.log(level, obj); };
+
+Handlebars.registerHelper('each', function(context, options) {
+  var fn = options.fn, inverse = options.inverse;
+  var i = 0, ret = "", data;
+
+  var type = toString.call(context);
+  if(type === functionType) { context = context.call(this); }
+
+  if (options.data) {
+    data = Handlebars.createFrame(options.data);
+  }
+
+  if(context && typeof context === 'object') {
+    if(context instanceof Array){
+      for(var j = context.length; i<j; i++) {
+        if (data) { data.index = i; }
+        ret = ret + fn(context[i], { data: data });
+      }
+    } else {
+      for(var key in context) {
+        if(context.hasOwnProperty(key)) {
+          if(data) { data.key = key; }
+          ret = ret + fn(context[key], {data: data});
+          i++;
+        }
+      }
+    }
+  }
+
+  if(i === 0){
+    ret = inverse(this);
+  }
+
+  return ret;
+});
+
+Handlebars.registerHelper('if', function(conditional, options) {
+  var type = toString.call(conditional);
+  if(type === functionType) { conditional = conditional.call(this); }
+
+  if(!conditional || Handlebars.Utils.isEmpty(conditional)) {
+    return options.inverse(this);
+  } else {
+    return options.fn(this);
+  }
+});
+
+Handlebars.registerHelper('unless', function(conditional, options) {
+  return Handlebars.helpers['if'].call(this, conditional, {fn: options.inverse, inverse: options.fn});
+});
+
+Handlebars.registerHelper('with', function(context, options) {
+  var type = toString.call(context);
+  if(type === functionType) { context = context.call(this); }
+
+  if (!Handlebars.Utils.isEmpty(context)) return options.fn(context);
+});
+
+Handlebars.registerHelper('log', function(context, options) {
+  var level = options.data && options.data.level != null ? parseInt(options.data.level, 10) : 1;
+  Handlebars.log(level, context);
+});
+;
+// lib/handlebars/utils.js
+
+var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
+
+Handlebars.Exception = function(message) {
+  var tmp = Error.prototype.constructor.apply(this, arguments);
+
+  // Unfortunately errors are not enumerable in Chrome (at least), so `for prop in tmp` doesn't work.
+  for (var idx = 0; idx < errorProps.length; idx++) {
+    this[errorProps[idx]] = tmp[errorProps[idx]];
+  }
+};
+Handlebars.Exception.prototype = new Error();
+
+// Build out our basic SafeString type
+Handlebars.SafeString = function(string) {
+  this.string = string;
+};
+Handlebars.SafeString.prototype.toString = function() {
+  return this.string.toString();
+};
+
+var escape = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#x27;",
+  "`": "&#x60;"
+};
+
+var badChars = /[&<>"'`]/g;
+var possible = /[&<>"'`]/;
+
+var escapeChar = function(chr) {
+  return escape[chr] || "&amp;";
+};
+
+Handlebars.Utils = {
+  extend: function(obj, value) {
+    for(var key in value) {
+      if(value.hasOwnProperty(key)) {
+        obj[key] = value[key];
+      }
+    }
+  },
+
+  escapeExpression: function(string) {
+    // don't escape SafeStrings, since they're already safe
+    if (string instanceof Handlebars.SafeString) {
+      return string.toString();
+    } else if (string == null || string === false) {
+      return "";
+    }
+
+    // Force a string conversion as this will be done by the append regardless and
+    // the regex test will do this transparently behind the scenes, causing issues if
+    // an object's to string has escaped characters in it.
+    string = string.toString();
+
+    if(!possible.test(string)) { return string; }
+    return string.replace(badChars, escapeChar);
+  },
+
+  isEmpty: function(value) {
+    if (!value && value !== 0) {
+      return true;
+    } else if(toString.call(value) === "[object Array]" && value.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+;
+// lib/handlebars/runtime.js
+
+Handlebars.VM = {
+  template: function(templateSpec) {
+    // Just add water
+    var container = {
+      escapeExpression: Handlebars.Utils.escapeExpression,
+      invokePartial: Handlebars.VM.invokePartial,
+      programs: [],
+      program: function(i, fn, data) {
+        var programWrapper = this.programs[i];
+        if(data) {
+          programWrapper = Handlebars.VM.program(i, fn, data);
+        } else if (!programWrapper) {
+          programWrapper = this.programs[i] = Handlebars.VM.program(i, fn);
+        }
+        return programWrapper;
+      },
+      merge: function(param, common) {
+        var ret = param || common;
+
+        if (param && common) {
+          ret = {};
+          Handlebars.Utils.extend(ret, common);
+          Handlebars.Utils.extend(ret, param);
+        }
+        return ret;
+      },
+      programWithDepth: Handlebars.VM.programWithDepth,
+      noop: Handlebars.VM.noop,
+      compilerInfo: null
+    };
+
+    return function(context, options) {
+      options = options || {};
+      var result = templateSpec.call(container, Handlebars, context, options.helpers, options.partials, options.data);
+
+      var compilerInfo = container.compilerInfo || [],
+          compilerRevision = compilerInfo[0] || 1,
+          currentRevision = Handlebars.COMPILER_REVISION;
+
+      if (compilerRevision !== currentRevision) {
+        if (compilerRevision < currentRevision) {
+          var runtimeVersions = Handlebars.REVISION_CHANGES[currentRevision],
+              compilerVersions = Handlebars.REVISION_CHANGES[compilerRevision];
+          throw "Template was precompiled with an older version of Handlebars than the current runtime. "+
+                "Please update your precompiler to a newer version ("+runtimeVersions+") or downgrade your runtime to an older version ("+compilerVersions+").";
+        } else {
+          // Use the embedded version info since the runtime doesn't know about this revision yet
+          throw "Template was precompiled with a newer version of Handlebars than the current runtime. "+
+                "Please update your runtime to a newer version ("+compilerInfo[1]+").";
+        }
+      }
+
+      return result;
+    };
+  },
+
+  programWithDepth: function(i, fn, data /*, $depth */) {
+    var args = Array.prototype.slice.call(arguments, 3);
+
+    var program = function(context, options) {
+      options = options || {};
+
+      return fn.apply(this, [context, options.data || data].concat(args));
+    };
+    program.program = i;
+    program.depth = args.length;
+    return program;
+  },
+  program: function(i, fn, data) {
+    var program = function(context, options) {
+      options = options || {};
+
+      return fn(context, options.data || data);
+    };
+    program.program = i;
+    program.depth = 0;
+    return program;
+  },
+  noop: function() { return ""; },
+  invokePartial: function(partial, name, context, helpers, partials, data) {
+    var options = { helpers: helpers, partials: partials, data: data };
+
+    if(partial === undefined) {
+      throw new Handlebars.Exception("The partial " + name + " could not be found");
+    } else if(partial instanceof Function) {
+      return partial(context, options);
+    } else if (!Handlebars.compile) {
+      throw new Handlebars.Exception("The partial " + name + " could not be compiled when running in runtime-only mode");
+    } else {
+      partials[name] = Handlebars.compile(partial, {data: data !== undefined});
+      return partials[name](context, options);
+    }
+  }
+};
+
+Handlebars.template = Handlebars.VM.template;
+;
+// lib/handlebars/browser-suffix.js
+})(Handlebars);
+;
+
+},{}],9:[function(require,module,exports){
 "use strict";
 /*globals Handlebars: true */
 var Handlebars = require("./handlebars.runtime")["default"];
@@ -952,7 +1382,7 @@ Handlebars.create = create;
 Handlebars['default'] = Handlebars;
 
 exports["default"] = Handlebars;
-},{"./handlebars.runtime":8,"./handlebars/compiler/ast":10,"./handlebars/compiler/base":11,"./handlebars/compiler/compiler":12,"./handlebars/compiler/javascript-compiler":14}],8:[function(require,module,exports){
+},{"./handlebars.runtime":10,"./handlebars/compiler/ast":12,"./handlebars/compiler/base":13,"./handlebars/compiler/compiler":14,"./handlebars/compiler/javascript-compiler":16}],10:[function(require,module,exports){
 "use strict";
 /*globals Handlebars: true */
 var base = require("./handlebars/base");
@@ -988,7 +1418,7 @@ Handlebars.create = create;
 Handlebars['default'] = Handlebars;
 
 exports["default"] = Handlebars;
-},{"./handlebars/base":9,"./handlebars/exception":18,"./handlebars/runtime":19,"./handlebars/safe-string":20,"./handlebars/utils":21}],9:[function(require,module,exports){
+},{"./handlebars/base":11,"./handlebars/exception":20,"./handlebars/runtime":21,"./handlebars/safe-string":22,"./handlebars/utils":23}],11:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -1220,7 +1650,7 @@ var createFrame = function(object) {
   return frame;
 };
 exports.createFrame = createFrame;
-},{"./exception":18,"./utils":21}],10:[function(require,module,exports){
+},{"./exception":20,"./utils":23}],12:[function(require,module,exports){
 "use strict";
 var Exception = require("../exception")["default"];
 
@@ -1435,7 +1865,7 @@ var AST = {
 // Must be exported as an object rather than the root of the module as the jison lexer
 // most modify the object to operate properly.
 exports["default"] = AST;
-},{"../exception":18}],11:[function(require,module,exports){
+},{"../exception":20}],13:[function(require,module,exports){
 "use strict";
 var parser = require("./parser")["default"];
 var AST = require("./ast")["default"];
@@ -1457,7 +1887,7 @@ function parse(input) {
 }
 
 exports.parse = parse;
-},{"../utils":21,"./ast":10,"./helpers":13,"./parser":15}],12:[function(require,module,exports){
+},{"../utils":23,"./ast":12,"./helpers":15,"./parser":17}],14:[function(require,module,exports){
 "use strict";
 var Exception = require("../exception")["default"];
 var isArray = require("../utils").isArray;
@@ -1910,7 +2340,7 @@ exports.compile = compile;function argEquals(a, b) {
     return true;
   }
 }
-},{"../exception":18,"../utils":21}],13:[function(require,module,exports){
+},{"../exception":20,"../utils":23}],15:[function(require,module,exports){
 "use strict";
 var Exception = require("../exception")["default"];
 
@@ -2098,7 +2528,7 @@ function omitLeft(statements, i, multiple) {
   current.leftStripped = current.string !== original;
   return current.leftStripped;
 }
-},{"../exception":18}],14:[function(require,module,exports){
+},{"../exception":20}],16:[function(require,module,exports){
 "use strict";
 var COMPILER_REVISION = require("../base").COMPILER_REVISION;
 var REVISION_CHANGES = require("../base").REVISION_CHANGES;
@@ -3063,7 +3493,7 @@ JavaScriptCompiler.isValidJavaScriptVariableName = function(name) {
 };
 
 exports["default"] = JavaScriptCompiler;
-},{"../base":9,"../exception":18}],15:[function(require,module,exports){
+},{"../base":11,"../exception":20}],17:[function(require,module,exports){
 "use strict";
 /* jshint ignore:start */
 /* istanbul ignore next */
@@ -3564,7 +3994,7 @@ function Parser () { this.yy = {}; }Parser.prototype = parser;parser.Parser = Pa
 return new Parser;
 })();exports["default"] = handlebars;
 /* jshint ignore:end */
-},{}],16:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 "use strict";
 var Visitor = require("./visitor")["default"];
 
@@ -3706,7 +4136,7 @@ PrintVisitor.prototype.content = function(content) {
 PrintVisitor.prototype.comment = function(comment) {
   return this.pad("{{! '" + comment.comment + "' }}");
 };
-},{"./visitor":17}],17:[function(require,module,exports){
+},{"./visitor":19}],19:[function(require,module,exports){
 "use strict";
 function Visitor() {}
 
@@ -3719,7 +4149,7 @@ Visitor.prototype = {
 };
 
 exports["default"] = Visitor;
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 "use strict";
 
 var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
@@ -3748,7 +4178,7 @@ function Exception(message, node) {
 Exception.prototype = new Error();
 
 exports["default"] = Exception;
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -3942,7 +4372,7 @@ exports.noop = noop;function initData(context, data) {
   }
   return data;
 }
-},{"./base":9,"./exception":18,"./utils":21}],20:[function(require,module,exports){
+},{"./base":11,"./exception":20,"./utils":23}],22:[function(require,module,exports){
 "use strict";
 // Build out our basic SafeString type
 function SafeString(string) {
@@ -3954,7 +4384,7 @@ SafeString.prototype.toString = function() {
 };
 
 exports["default"] = SafeString;
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 "use strict";
 /*jshint -W004 */
 var SafeString = require("./safe-string")["default"];
@@ -4043,7 +4473,7 @@ exports.isEmpty = isEmpty;function appendContextPath(contextPath, id) {
 }
 
 exports.appendContextPath = appendContextPath;
-},{"./safe-string":20}],22:[function(require,module,exports){
+},{"./safe-string":22}],24:[function(require,module,exports){
 // USAGE:
 // var handlebars = require('handlebars');
 
@@ -4071,7 +4501,7 @@ if (typeof require !== 'undefined' && require.extensions) {
   require.extensions[".hbs"] = extension;
 }
 
-},{"../dist/cjs/handlebars":7,"../dist/cjs/handlebars/compiler/printer":16,"../dist/cjs/handlebars/compiler/visitor":17,"fs":6}],23:[function(require,module,exports){
+},{"../dist/cjs/handlebars":9,"../dist/cjs/handlebars/compiler/printer":18,"../dist/cjs/handlebars/compiler/visitor":19,"fs":7}],25:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
@@ -13813,7 +14243,7 @@ return jQuery;
 
 
 
-},{}],24:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /*!
  * mustache.js - Logic-less {{mustache}} templates with JavaScript
  * http://github.com/janl/mustache.js

@@ -1,8 +1,10 @@
 
 module.exports=(function(){
-	var $ 			= require('jquery'),
-		Handlebars 	= require('handlebars'),
-		export_ 	= {};
+	var $ 						= require('jquery'),
+		Handlebars 				= require('handlebars'),
+		//Handlebars runtime is used with precompiled templates
+		Handlebars_runntime 	= require('handlebars-runtime'),
+		export_ 				= {};
  
 
 
@@ -72,6 +74,7 @@ module.exports=(function(){
 	export_.renderHelpersTemplate = function(e){ 
 		$("document").ready(function() {
            // register the helper
+        		console.log('Handlebars = ', Handlebars);
            Handlebars.registerHelper("prodQuantity", function (prodData) {
                 if (prodData.quantity >= 100)
                   return "We currently have a large amount in stock.";
@@ -95,6 +98,26 @@ module.exports=(function(){
             });
 
             $("#container3").html(result);
+        });
+	};
+ 
+          
+         
+	// ......     
+	export_.renderPrecompiledTemplate = function(e){ 
+		$("document").ready(function() {
+        	var tpl_precompiled = require('.././tpl/precomp.js');
+        		console.log('Handlebars.templates = ', Handlebars.templates );
+
+        	var result = tpl_precompiled({
+                "item" : "Whisper 4000 in-home heater and dog walker",
+                "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
+                "price" : 895.99,
+                "inStock" : true,
+                "quantity" : 100
+            });
+
+            $("#container4").html(result);
         });
 	};
 

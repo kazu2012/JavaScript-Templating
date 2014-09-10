@@ -31,6 +31,7 @@
 				handlebars_templating.renderSimpleTemplate();
 				handlebars_templating.renderConditionalTemplate();
 				handlebars_templating.renderHelpersTemplate();
+				handlebars_templating.renderPrecompiledTemplate();
 			break;
 
 			case 'dust_templating' :
