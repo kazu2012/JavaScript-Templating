@@ -1,10 +1,9 @@
-
-
+/**
+* jQuery template rendering module
+*/
 module.exports =(function(){
 	var export_ 	= {},
 		$ 			= require('jquery'); 
- 
-
 
 	//Loading a simple external file ......
 	export_.renderSimpleTemplate = function(e){ 
@@ -33,14 +32,11 @@ module.exports =(function(){
            "title" : "Janitor",
            "fulltime" : false
         }], { isFile : true } );  
-	};
+	};//export_.renderSimpleTemplate
+ 
 
 
-
-
-
-
-	//Loading an external file with formater ......
+    //Loading an external file with formater ......
 	export_.renderFormatterTemplate = function(e){
  		$.addTemplateFormatter("UpperCaseFormatter", function(value, options) {
            return value.toUpperCase();
@@ -72,61 +68,54 @@ module.exports =(function(){
            "title" : "Janitor",
            "fulltime" : false
         }]);
-	};
+	};//export_.renderFormatterTemplate
+ 
 
 
-
-
-
-	//Render template with pagination ......
+    //Render template with pagination ......
 	export_.renderPagingTemplate = function (e) {
         var curPage = 1;
         var templateData = null;
 
         //....  
 		function getData_() {
-            $.getJSON("js/templateData.json", function(data) { 
-                templateData = data;
-                renderTemplates_(templateData, curPage);
-            });
-        } 
+          $.getJSON("js/templateData.json", function(data) { 
+              templateData = data;
+              renderTemplates_(templateData, curPage);
+          });
+        }//getData_
 
         function renderTemplates_(data, pageNo) {
             $("#container3").loadTemplate($("#tpl-paged"), data["employees"], 
                     {paged: true, pageNo: pageNo, elemPerPage: 1});
-        }
+        }// renderTemplates_
 
         window.addEventListener("load", function(e) {
             $.addTemplateFormatter("EmailLink", function(value, options) {
-                 return "mailto:" + value;
+               return "mailto:" + value;
             });
-             
+           
             document.querySelector("#prevPage").addEventListener("click", function (evt) {
-                 if (curPage > 1) {
-                    renderTemplates_(templateData, --curPage);
-                 }
+               if (curPage > 1) {
+                  renderTemplates_(templateData, --curPage);
+               }
             });
             document.querySelector("#nextPage").addEventListener("click", function (evt) {
-                 if (curPage < 4) {
-                    renderTemplates_(templateData, ++curPage);
-                 }
+               if (curPage < 4) {
+                  renderTemplates_(templateData, ++curPage);
+               }
             });
 
             getData_();
-        });
-
-	};
-
-
+        });//window.addEventListener
+	};//export_.renderPagingTemplate
+ 
 
 
-
-	// Render template with binding options ......
+    // Render template with binding options ......
 	// When making multiple calls to loadTemplate(), using the append or prepend options
     // can add content to the template container instead of completely replacing it
-	export_.renderBindingTemplates = function (e) {
-
-         
+	export_.renderBindingTemplates = function (e) {   
         function renderTemplates_() {
          	var containerID = '#container4';
             $(containerID).loadTemplate($("#tpl-binding"), {
@@ -149,36 +138,24 @@ module.exports =(function(){
             }, 
             //binding options ...
             {append: true, beforeInsert: onBefore, afterInsert: onAfter, complete: onComplete}); 
-        }
-
+        }//renderTemplates_
 
         //callback functions (just to let us know what happened)
         function onBefore(data) {
-          console.log("Content about to be inserted: " + data);
+            console.log("Content about to be inserted: " + data);
         }
         function onAfter(data) {
-          console.log("Content has been inserted: " + data);
+            console.log("Content has been inserted: " + data);
         }
         function onComplete() {
-          console.log("Operation complete");
-        }
-
-
-
+            console.log("Operation complete");
+        } 
+        //.....
         window.addEventListener("load", function(e) {
              renderTemplates_();
         }); 
-    }; 
-
-
-
+    };//export_.renderBindingTemplates
 
 	return export_;
 })();
-
-
-
-
-
- 
 

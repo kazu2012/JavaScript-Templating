@@ -1,15 +1,14 @@
-
-
+/**
+* Main execution files
+*/
 (function(){
 	var $ 			= require('jquery'),
 		//Mustache 	= require('mustache'),
 		jquery_templating 		= require('./jquery-templating.js'),
 		mustache_templating 	= require('./mustache-templating.js'),
-		handlebars_templating 	= require('./handlebars-templating.js'),
-		dust_templating 		= require('./dust-templating.js');
+		handlebars_templating 	= require('./handlebars-templating.js');
 
-
-	//window.addEventListener("load", function(){
+	//when document if ready
 	$('document').ready(function(){
 		switch( $('body').attr('class') ){
 			case 'jquery-templating' :
@@ -33,16 +32,6 @@
 				handlebars_templating.renderHelpersTemplate();
 				handlebars_templating.renderPrecompiledTemplate();
 			break;
-
-			case 'dust_templating' :
-			break;
-		}
-		
-
-
-	});
-
-		 
- 
-	
-})();
+		}//switch
+	});//$('document').ready
+})();//(function()

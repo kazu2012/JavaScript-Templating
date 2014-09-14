@@ -27,7 +27,6 @@ var sources = {
 	'js' 	: ['components/scripts/jquery-templating.js',
 				'components/scripts/mustache-templating.js',
 				'components/scripts/handlebars-templating.js',
-				'components/scripts/dust-templating.js',
 				'components/scripts/exe.js'
 				],
 	'sass' 	: [],

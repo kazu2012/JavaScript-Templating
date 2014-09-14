@@ -1,28 +1,10 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-
-module.exports=(function(){
-	var $ 			= require('jquery'),
-		Handlebars 	= require('handlebars'),
-		export_ 	= {};
-	
-
-
-
-
-
-
-	return export_;
-
- 
-})();
-},{"handlebars":24,"jquery":25}],2:[function(require,module,exports){
-
-
+/**
+* jQuery template rendering module
+*/
 module.exports =(function(){
 	var export_ 	= {},
 		$ 			= require('jquery'); 
- 
-
 
 	//Loading a simple external file ......
 	export_.renderSimpleTemplate = function(e){ 
@@ -51,14 +33,11 @@ module.exports =(function(){
            "title" : "Janitor",
            "fulltime" : false
         }], { isFile : true } );  
-	};
+	};//export_.renderSimpleTemplate
+ 
 
 
-
-
-
-
-	//Loading an external file with formater ......
+    //Loading an external file with formater ......
 	export_.renderFormatterTemplate = function(e){
  		$.addTemplateFormatter("UpperCaseFormatter", function(value, options) {
            return value.toUpperCase();
@@ -90,61 +69,54 @@ module.exports =(function(){
            "title" : "Janitor",
            "fulltime" : false
         }]);
-	};
+	};//export_.renderFormatterTemplate
+ 
 
 
-
-
-
-	//Render template with pagination ......
+    //Render template with pagination ......
 	export_.renderPagingTemplate = function (e) {
         var curPage = 1;
         var templateData = null;
 
         //....  
 		function getData_() {
-            $.getJSON("js/templateData.json", function(data) { 
-                templateData = data;
-                renderTemplates_(templateData, curPage);
-            });
-        } 
+          $.getJSON("js/templateData.json", function(data) { 
+              templateData = data;
+              renderTemplates_(templateData, curPage);
+          });
+        }//getData_
 
         function renderTemplates_(data, pageNo) {
             $("#container3").loadTemplate($("#tpl-paged"), data["employees"], 
                     {paged: true, pageNo: pageNo, elemPerPage: 1});
-        }
+        }// renderTemplates_
 
         window.addEventListener("load", function(e) {
             $.addTemplateFormatter("EmailLink", function(value, options) {
-                 return "mailto:" + value;
+               return "mailto:" + value;
             });
-             
+           
             document.querySelector("#prevPage").addEventListener("click", function (evt) {
-                 if (curPage > 1) {
-                    renderTemplates_(templateData, --curPage);
-                 }
+               if (curPage > 1) {
+                  renderTemplates_(templateData, --curPage);
+               }
             });
             document.querySelector("#nextPage").addEventListener("click", function (evt) {
-                 if (curPage < 4) {
-                    renderTemplates_(templateData, ++curPage);
-                 }
+               if (curPage < 4) {
+                  renderTemplates_(templateData, ++curPage);
+               }
             });
 
             getData_();
-        });
-
-	};
-
-
+        });//window.addEventListener
+	};//export_.renderPagingTemplate
+ 
 
 
-
-	// Render template with binding options ......
+    // Render template with binding options ......
 	// When making multiple calls to loadTemplate(), using the append or prepend options
     // can add content to the template container instead of completely replacing it
-	export_.renderBindingTemplates = function (e) {
-
-         
+	export_.renderBindingTemplates = function (e) {   
         function renderTemplates_() {
          	var containerID = '#container4';
             $(containerID).loadTemplate($("#tpl-binding"), {
@@ -167,110 +139,94 @@ module.exports =(function(){
             }, 
             //binding options ...
             {append: true, beforeInsert: onBefore, afterInsert: onAfter, complete: onComplete}); 
-        }
-
+        }//renderTemplates_
 
         //callback functions (just to let us know what happened)
         function onBefore(data) {
-          console.log("Content about to be inserted: " + data);
+            console.log("Content about to be inserted: " + data);
         }
         function onAfter(data) {
-          console.log("Content has been inserted: " + data);
+            console.log("Content has been inserted: " + data);
         }
         function onComplete() {
-          console.log("Operation complete");
-        }
-
-
-
+            console.log("Operation complete");
+        } 
+        //.....
         window.addEventListener("load", function(e) {
              renderTemplates_();
         }); 
-    }; 
-
-
-
+    };//export_.renderBindingTemplates
 
 	return export_;
 })();
 
 
-
-
-
- 
-
-
-
+/**
+* Mustache template rendering module
+*/
 module.exports=(function(){
 	var $ 			= require('jquery'),
 		Mustache 	= require('mustache'),
 		export_ 	= {};
  
-
-
 	// ......
-	export_.renderSimpleTemplate = function(e){ 
-		$("document").ready(function() {
-			//get template html
-            var template = $("#tpl-mustache-simple").html(); 
-            //feed json data to the template
-            var result = Mustache.render(template, {
-                "item" : "Whisper 4000 in-home heater and dog walker",
-                "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
-                "price" : 895.99,
-                "inStock" : true,
-                "quantity" : 100
-            } );
-            //render the template html
-            $("#container1").html(result);
-        });
-	};
+	export_.renderSimpleTemplate = function(e){  
+		//get template html
+        var template = $("#tpl-mustache-simple").html(); 
+        //feed json data to the template
+        var result = Mustache.render(template, {
+            "item" : "Whisper 4000 in-home heater and dog walker",
+            "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
+            "price" : 895.99,
+            "inStock" : true,
+            "quantity" : 100
+        });//Mustache.render
+        //render the template html
+        $("#container1").html(result); 
+	};//export_.renderSimpleTemplate
  
 
 
-	// ......
-	export_.renderSectionTemplate = function(e){ 
-		$("document").ready(function() {
-			//get template html
-            var template = $("#tpl-mustache-sections").html(); 
-            //feed json data to the template
-            var result = Mustache.render(template, {
-               "employees" : [{
-                  "name" : "Henry Handsome",
-                  "phone" : "+1-212-555-1234",
-                  "email" : "pensive@example.com",
-                  "title" : "Senior VP of Basketweaving",
-                  "fulltime" : true
-               }, {
-                  "name" : "Penelope Persistent",
-                  "phone" : "+1-212-555-8000",
-                  "email" : "truthful@example.com",
-                  "title" : "Principal Understudy",
-                  "fulltime" : false
-               }, {
-                  "name" : "Sam Serendipity",
-                  "phone" : "+1-212-555-9876",
-                  "email" : "helpful@example.com",
-                  "title" : "Chief Cook and Bottle Washer",
-                  "fulltime" : true
-               }, {
-                  "name" : "Tom Terriffic",
-                  "phone" : "+1-212-555-0011",
-                  "email" : "grumpy@example.com",
-                  "title" : "Janitor",
-                  "fulltime" : false
-               }]
-            });
+    // ......
+	export_.renderSectionTemplate = function(e){  
+		//get template html
+        var template = $("#tpl-mustache-sections").html(); 
+        //feed json data to the template
+        var result = Mustache.render(template, {
+            "employees" : [{
+              "name" : "Henry Handsome",
+              "phone" : "+1-212-555-1234",
+              "email" : "pensive@example.com",
+              "title" : "Senior VP of Basketweaving",
+              "fulltime" : true
+            }, {
+              "name" : "Penelope Persistent",
+              "phone" : "+1-212-555-8000",
+              "email" : "truthful@example.com",
+              "title" : "Principal Understudy",
+              "fulltime" : false
+            }, {
+              "name" : "Sam Serendipity",
+              "phone" : "+1-212-555-9876",
+              "email" : "helpful@example.com",
+              "title" : "Chief Cook and Bottle Washer",
+              "fulltime" : true
+            }, {
+              "name" : "Tom Terriffic",
+              "phone" : "+1-212-555-0011",
+              "email" : "grumpy@example.com",
+              "title" : "Janitor",
+              "fulltime" : false
+            }]
+        });//Mustache.render
 
-            //render the template html
-            $("#container2").html(result);
-        });
-	};
+        //render the template html
+        $("#container2").html(result); 
+	};//export_.renderSectionTemplate
  
 
 
-	// ......
+    // ......
 	export_.renderSection2Template = function(e){ 
         var template 	= $("#tpl-mustache-sections-conditions").html();
         var result 		= Mustache.render(template, {
@@ -281,11 +237,11 @@ module.exports=(function(){
                 "quantity" : 100
             } );
         $("#container3").html(result); 
-	};
+	};//export_.renderSection2Template
  
 
 
-	// ......
+    // ......
 	export_.renderFunctionsTemplate = function(e){ 
         var template = $("#tpl-mustache-functions").html();
         var prodData = {
@@ -309,18 +265,13 @@ module.exports=(function(){
 
         var result = Mustache.render(template, prodData );
         $("#container4").html(result);
-	};
-
-
-
-
-
-
-	return export_;
-
+	};//export_.renderFunctionsTemplate
  
+    return export_; 
 })();
-
+/**
+* Handlebar template rendering module
+*/
 module.exports=(function(){
 	var $ 						= require('jquery'),
 		Handlebars 				= require('handlebars'),
@@ -328,159 +279,126 @@ module.exports=(function(){
 		Handlebars_runntime 	= require('handlebars-runtime'),
 		export_ 				= {};
  
-
-
 	// ......     
-	export_.renderSimpleTemplate = function(e){ 
- 
-		$("document").ready(function() {
-			//get template html
-            var template = $("#tpl-handlebars-simple").html(); 
-			//compiles template into scallable function
-            var renderer = Handlebars.compile(template);
-            //call the compiled function with the template data
-            var result = renderer({
-                "item" : "Whisper 4000 in-home heater and dog walker",
-                "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
-                "price" : 895.99,
-                "inStock" : true,
-                "quantity" : 100
-            });
-            //render the template html
-            $("#container1").html(result);
-        });
-	};
+	export_.renderSimpleTemplate = function(e){  
+    //get template html
+    var template = $("#tpl-handlebars-simple").html(); 
+     //compiles template into scallable function
+    var renderer = Handlebars.compile(template);
+    //call the compiled function with the template data
+    var result = renderer({
+        "item" : "Whisper 4000 in-home heater and dog walker",
+        "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
+        "price" : 895.99,
+        "inStock" : true,
+        "quantity" : 100
+    });
+    //render the template html
+    $("#container1").html(result); 
+	};//export_.renderSimpleTemplate
  
 
 
 	// ......     
 	export_.renderConditionalTemplate = function(e){ 
 		var template = $("#tpl-handlebars-conditions").html();
-        // Handlebars compiles the template into a callable function
-        var renderer = Handlebars.compile(template);
-        // call the compiled function with the template data
-        var result = renderer({
-           "employees" : [{
-              "name" : "Henry Handsome",
-              "phone" : "+1-212-555-1234",
-              "email" : "pensive@example.com",
-              "title" : "Senior VP of Basketweaving",
-              "fulltime" : true
-           }, {
-              "name" : "Penelope Persistent",
-              "phone" : "+1-212-555-8000",
-              "email" : "truthful@example.com",
-              "title" : "Principal Understudy",
-              "fulltime" : false
-           }, {
-              "name" : "Sam Serendipity",
-              "phone" : "+1-212-555-9876",
-              "email" : "helpful@example.com",
-              "title" : "Chief Cook and Bottle Washer",
-              "fulltime" : true
-           }, {
-              "name" : "Tom Terriffic",
-              "phone" : "+1-212-555-0011",
-              "email" : "grumpy@example.com",
-              "title" : "Janitor",
-              "fulltime" : false
-           }]});
+    // Handlebars compiles the template into a callable function
+    var renderer = Handlebars.compile(template);
+    // call the compiled function with the template data
+    var result = renderer({
+       "employees" : [{
+          "name" : "Henry Handsome",
+          "phone" : "+1-212-555-1234",
+          "email" : "pensive@example.com",
+          "title" : "Senior VP of Basketweaving",
+          "fulltime" : true
+       }, {
+          "name" : "Penelope Persistent",
+          "phone" : "+1-212-555-8000",
+          "email" : "truthful@example.com",
+          "title" : "Principal Understudy",
+          "fulltime" : false
+       }, {
+          "name" : "Sam Serendipity",
+          "phone" : "+1-212-555-9876",
+          "email" : "helpful@example.com",
+          "title" : "Chief Cook and Bottle Washer",
+          "fulltime" : true
+       }, {
+          "name" : "Tom Terriffic",
+          "phone" : "+1-212-555-0011",
+          "email" : "grumpy@example.com",
+          "title" : "Janitor",
+          "fulltime" : false
+    }]});//renderer({
 
-        //render the template html
-        $("#container2").html(result);
-	};
+    //render the template html
+    $("#container2").html(result);
+	};//export_.renderConditionalTemplate
  
 
 
-	// ......     
-	export_.renderHelpersTemplate = function(e){ 
-		$("document").ready(function() {
-           // register the helper
-        		console.log('Handlebars = ', Handlebars);
-           Handlebars.registerHelper("prodQuantity", function (prodData) {
-                if (prodData.quantity >= 100)
-                  return "We currently have a large amount in stock.";
-                else
-                  return "Hurry! We don't have many left in stock";    
-            });
-           
-            
-            var template = $("#tpl-handlebars-helpers").html();
-            // Handlebars compiles the template into a callable function
-            var renderer = Handlebars.compile(template);
-            // call the compiled function with the template data
-            var result = renderer({
-               "item" : "Whisper 4000 in-home heater and dog walker",
-               "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
-               "data" : {
-                   "price" : 895.99,
-                   "inStock" : false,
-                   "quantity" : 100
-               }
-            });
+  // ......     
+	export_.renderHelpersTemplate = function(e){  
+    // register the helper
+		console.log('Handlebars = ', Handlebars);
+    Handlebars.registerHelper("prodQuantity", function (prodData) {
+        if (prodData.quantity >= 100)
+          return "We currently have a large amount in stock.";
+        else
+          return "Hurry! We don't have many left in stock";    
+    }); 
+    
+    var template = $("#tpl-handlebars-helpers").html();
+    // Handlebars compiles the template into a callable function
+    var renderer = Handlebars.compile(template);
+    // call the compiled function with the template data
+    var result = renderer({
+       "item" : "Whisper 4000 in-home heater and dog walker",
+       "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
+       "data" : {
+           "price" : 895.99,
+           "inStock" : false,
+           "quantity" : 100
+       }
+    });
 
-            $("#container3").html(result);
-        });
-	};
+    $("#container3").html(result); 
+	};//export_.renderHelpersTemplate
  
-          
-         
-	// ......     
-	export_.renderPrecompiledTemplate = function(e){ 
-		$("document").ready(function() {
-        	var tpl_precompiled = require('.././tpl/precomp.js');
-        		console.log('Handlebars.templates = ', Handlebars.templates );
-
-        	var result = tpl_precompiled({
-                "item" : "Whisper 4000 in-home heater and dog walker",
-                "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
-                "price" : 895.99,
-                "inStock" : true,
-                "quantity" : 100
-            });
-
-            $("#container4").html(result);
-        });
-	};
 
 
+  // ......     
+	export_.renderPrecompiledTemplate = function(e){  
+  	var tpl_precompiled = require('.././tpl/precomp.js');
+  		console.log('Handlebars.templates = ', Handlebars.templates );
 
+  	var result = tpl_precompiled({
+          "item" : "Whisper 4000 in-home heater and dog walker",
+          "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
+          "price" : 895.99,
+          "inStock" : true,
+          "quantity" : 100
+      });
 
-
-
+    $("#container4").html(result); 
+	};//export_.renderPrecompiledTemplate
 
 	return export_;
-
- 
-})();
-
-module.exports=(function(){
-	var $ 			= require('jquery'),
-		Handlebars 	= require('handlebars'),
-		export_ 	= {};
-	
-
-
-
-
-
-
-	return export_;
-
- 
 })();
 
 
+/**
+* Main execution files
+*/
 (function(){
 	var $ 			= require('jquery'),
 		//Mustache 	= require('mustache'),
 		jquery_templating 		= require('./jquery-templating.js'),
 		mustache_templating 	= require('./mustache-templating.js'),
-		handlebars_templating 	= require('./handlebars-templating.js'),
-		dust_templating 		= require('./dust-templating.js');
+		handlebars_templating 	= require('./handlebars-templating.js');
 
-
-	//window.addEventListener("load", function(){
+	//when document if ready
 	$('document').ready(function(){
 		switch( $('body').attr('class') ){
 			case 'jquery-templating' :
@@ -504,21 +422,13 @@ module.exports=(function(){
 				handlebars_templating.renderHelpersTemplate();
 				handlebars_templating.renderPrecompiledTemplate();
 			break;
-
-			case 'dust_templating' :
-			break;
-		}
-		
-
-
-	});
-
-		 
- 
-	
-})();
-},{".././tpl/precomp.js":6,"./dust-templating.js":1,"./handlebars-templating.js":3,"./jquery-templating.js":4,"./mustache-templating.js":5,"handlebars":24,"handlebars-runtime":8,"jquery":25,"mustache":26}],3:[function(require,module,exports){
-
+		}//switch
+	});//$('document').ready
+})();//(function()
+},{".././tpl/precomp.js":5,"./handlebars-templating.js":2,"./jquery-templating.js":3,"./mustache-templating.js":4,"handlebars":23,"handlebars-runtime":7,"jquery":24,"mustache":25}],2:[function(require,module,exports){
+/**
+* Handlebar template rendering module
+*/
 module.exports=(function(){
 	var $ 						= require('jquery'),
 		Handlebars 				= require('handlebars'),
@@ -526,139 +436,122 @@ module.exports=(function(){
 		Handlebars_runntime 	= require('handlebars-runtime'),
 		export_ 				= {};
  
-
-
 	// ......     
-	export_.renderSimpleTemplate = function(e){ 
- 
-		$("document").ready(function() {
-			//get template html
-            var template = $("#tpl-handlebars-simple").html(); 
-			//compiles template into scallable function
-            var renderer = Handlebars.compile(template);
-            //call the compiled function with the template data
-            var result = renderer({
-                "item" : "Whisper 4000 in-home heater and dog walker",
-                "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
-                "price" : 895.99,
-                "inStock" : true,
-                "quantity" : 100
-            });
-            //render the template html
-            $("#container1").html(result);
-        });
-	};
+	export_.renderSimpleTemplate = function(e){  
+    //get template html
+    var template = $("#tpl-handlebars-simple").html(); 
+     //compiles template into scallable function
+    var renderer = Handlebars.compile(template);
+    //call the compiled function with the template data
+    var result = renderer({
+        "item" : "Whisper 4000 in-home heater and dog walker",
+        "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
+        "price" : 895.99,
+        "inStock" : true,
+        "quantity" : 100
+    });
+    //render the template html
+    $("#container1").html(result); 
+	};//export_.renderSimpleTemplate
  
 
 
 	// ......     
 	export_.renderConditionalTemplate = function(e){ 
 		var template = $("#tpl-handlebars-conditions").html();
-        // Handlebars compiles the template into a callable function
-        var renderer = Handlebars.compile(template);
-        // call the compiled function with the template data
-        var result = renderer({
-           "employees" : [{
-              "name" : "Henry Handsome",
-              "phone" : "+1-212-555-1234",
-              "email" : "pensive@example.com",
-              "title" : "Senior VP of Basketweaving",
-              "fulltime" : true
-           }, {
-              "name" : "Penelope Persistent",
-              "phone" : "+1-212-555-8000",
-              "email" : "truthful@example.com",
-              "title" : "Principal Understudy",
-              "fulltime" : false
-           }, {
-              "name" : "Sam Serendipity",
-              "phone" : "+1-212-555-9876",
-              "email" : "helpful@example.com",
-              "title" : "Chief Cook and Bottle Washer",
-              "fulltime" : true
-           }, {
-              "name" : "Tom Terriffic",
-              "phone" : "+1-212-555-0011",
-              "email" : "grumpy@example.com",
-              "title" : "Janitor",
-              "fulltime" : false
-           }]});
+    // Handlebars compiles the template into a callable function
+    var renderer = Handlebars.compile(template);
+    // call the compiled function with the template data
+    var result = renderer({
+       "employees" : [{
+          "name" : "Henry Handsome",
+          "phone" : "+1-212-555-1234",
+          "email" : "pensive@example.com",
+          "title" : "Senior VP of Basketweaving",
+          "fulltime" : true
+       }, {
+          "name" : "Penelope Persistent",
+          "phone" : "+1-212-555-8000",
+          "email" : "truthful@example.com",
+          "title" : "Principal Understudy",
+          "fulltime" : false
+       }, {
+          "name" : "Sam Serendipity",
+          "phone" : "+1-212-555-9876",
+          "email" : "helpful@example.com",
+          "title" : "Chief Cook and Bottle Washer",
+          "fulltime" : true
+       }, {
+          "name" : "Tom Terriffic",
+          "phone" : "+1-212-555-0011",
+          "email" : "grumpy@example.com",
+          "title" : "Janitor",
+          "fulltime" : false
+    }]});//renderer({
 
-        //render the template html
-        $("#container2").html(result);
-	};
+    //render the template html
+    $("#container2").html(result);
+	};//export_.renderConditionalTemplate
  
 
 
-	// ......     
-	export_.renderHelpersTemplate = function(e){ 
-		$("document").ready(function() {
-           // register the helper
-        		console.log('Handlebars = ', Handlebars);
-           Handlebars.registerHelper("prodQuantity", function (prodData) {
-                if (prodData.quantity >= 100)
-                  return "We currently have a large amount in stock.";
-                else
-                  return "Hurry! We don't have many left in stock";    
-            });
-           
-            
-            var template = $("#tpl-handlebars-helpers").html();
-            // Handlebars compiles the template into a callable function
-            var renderer = Handlebars.compile(template);
-            // call the compiled function with the template data
-            var result = renderer({
-               "item" : "Whisper 4000 in-home heater and dog walker",
-               "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
-               "data" : {
-                   "price" : 895.99,
-                   "inStock" : false,
-                   "quantity" : 100
-               }
-            });
+  // ......     
+	export_.renderHelpersTemplate = function(e){  
+    // register the helper
+		console.log('Handlebars = ', Handlebars);
+    Handlebars.registerHelper("prodQuantity", function (prodData) {
+        if (prodData.quantity >= 100)
+          return "We currently have a large amount in stock.";
+        else
+          return "Hurry! We don't have many left in stock";    
+    }); 
+    
+    var template = $("#tpl-handlebars-helpers").html();
+    // Handlebars compiles the template into a callable function
+    var renderer = Handlebars.compile(template);
+    // call the compiled function with the template data
+    var result = renderer({
+       "item" : "Whisper 4000 in-home heater and dog walker",
+       "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
+       "data" : {
+           "price" : 895.99,
+           "inStock" : false,
+           "quantity" : 100
+       }
+    });
 
-            $("#container3").html(result);
-        });
-	};
+    $("#container3").html(result); 
+	};//export_.renderHelpersTemplate
  
-          
-         
-	// ......     
-	export_.renderPrecompiledTemplate = function(e){ 
-		$("document").ready(function() {
-        	var tpl_precompiled = require('.././tpl/precomp.js');
-        		console.log('Handlebars.templates = ', Handlebars.templates );
-
-        	var result = tpl_precompiled({
-                "item" : "Whisper 4000 in-home heater and dog walker",
-                "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
-                "price" : 895.99,
-                "inStock" : true,
-                "quantity" : 100
-            });
-
-            $("#container4").html(result);
-        });
-	};
 
 
+  // ......     
+	export_.renderPrecompiledTemplate = function(e){  
+  	var tpl_precompiled = require('.././tpl/precomp.js');
+  		console.log('Handlebars.templates = ', Handlebars.templates );
 
+  	var result = tpl_precompiled({
+          "item" : "Whisper 4000 in-home heater and dog walker",
+          "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
+          "price" : 895.99,
+          "inStock" : true,
+          "quantity" : 100
+      });
 
-
-
+    $("#container4").html(result); 
+	};//export_.renderPrecompiledTemplate
 
 	return export_;
-
- 
 })();
-},{".././tpl/precomp.js":6,"handlebars":24,"handlebars-runtime":8,"jquery":25}],4:[function(require,module,exports){
 
 
+},{".././tpl/precomp.js":5,"handlebars":23,"handlebars-runtime":7,"jquery":24}],3:[function(require,module,exports){
+/**
+* jQuery template rendering module
+*/
 module.exports =(function(){
 	var export_ 	= {},
 		$ 			= require('jquery'); 
- 
-
 
 	//Loading a simple external file ......
 	export_.renderSimpleTemplate = function(e){ 
@@ -687,14 +580,11 @@ module.exports =(function(){
            "title" : "Janitor",
            "fulltime" : false
         }], { isFile : true } );  
-	};
+	};//export_.renderSimpleTemplate
+ 
 
 
-
-
-
-
-	//Loading an external file with formater ......
+    //Loading an external file with formater ......
 	export_.renderFormatterTemplate = function(e){
  		$.addTemplateFormatter("UpperCaseFormatter", function(value, options) {
            return value.toUpperCase();
@@ -726,61 +616,54 @@ module.exports =(function(){
            "title" : "Janitor",
            "fulltime" : false
         }]);
-	};
+	};//export_.renderFormatterTemplate
+ 
 
 
-
-
-
-	//Render template with pagination ......
+    //Render template with pagination ......
 	export_.renderPagingTemplate = function (e) {
         var curPage = 1;
         var templateData = null;
 
         //....  
 		function getData_() {
-            $.getJSON("js/templateData.json", function(data) { 
-                templateData = data;
-                renderTemplates_(templateData, curPage);
-            });
-        } 
+          $.getJSON("js/templateData.json", function(data) { 
+              templateData = data;
+              renderTemplates_(templateData, curPage);
+          });
+        }//getData_
 
         function renderTemplates_(data, pageNo) {
             $("#container3").loadTemplate($("#tpl-paged"), data["employees"], 
                     {paged: true, pageNo: pageNo, elemPerPage: 1});
-        }
+        }// renderTemplates_
 
         window.addEventListener("load", function(e) {
             $.addTemplateFormatter("EmailLink", function(value, options) {
-                 return "mailto:" + value;
+               return "mailto:" + value;
             });
-             
+           
             document.querySelector("#prevPage").addEventListener("click", function (evt) {
-                 if (curPage > 1) {
-                    renderTemplates_(templateData, --curPage);
-                 }
+               if (curPage > 1) {
+                  renderTemplates_(templateData, --curPage);
+               }
             });
             document.querySelector("#nextPage").addEventListener("click", function (evt) {
-                 if (curPage < 4) {
-                    renderTemplates_(templateData, ++curPage);
-                 }
+               if (curPage < 4) {
+                  renderTemplates_(templateData, ++curPage);
+               }
             });
 
             getData_();
-        });
-
-	};
-
-
+        });//window.addEventListener
+	};//export_.renderPagingTemplate
+ 
 
 
-
-	// Render template with binding options ......
+    // Render template with binding options ......
 	// When making multiple calls to loadTemplate(), using the append or prepend options
     // can add content to the template container instead of completely replacing it
-	export_.renderBindingTemplates = function (e) {
-
-         
+	export_.renderBindingTemplates = function (e) {   
         function renderTemplates_() {
          	var containerID = '#container4';
             $(containerID).loadTemplate($("#tpl-binding"), {
@@ -803,111 +686,95 @@ module.exports =(function(){
             }, 
             //binding options ...
             {append: true, beforeInsert: onBefore, afterInsert: onAfter, complete: onComplete}); 
-        }
-
+        }//renderTemplates_
 
         //callback functions (just to let us know what happened)
         function onBefore(data) {
-          console.log("Content about to be inserted: " + data);
+            console.log("Content about to be inserted: " + data);
         }
         function onAfter(data) {
-          console.log("Content has been inserted: " + data);
+            console.log("Content has been inserted: " + data);
         }
         function onComplete() {
-          console.log("Operation complete");
-        }
-
-
-
+            console.log("Operation complete");
+        } 
+        //.....
         window.addEventListener("load", function(e) {
              renderTemplates_();
         }); 
-    }; 
-
-
-
+    };//export_.renderBindingTemplates
 
 	return export_;
 })();
 
 
-
-
-
- 
-
-
-},{"jquery":25}],5:[function(require,module,exports){
-
+},{"jquery":24}],4:[function(require,module,exports){
+/**
+* Mustache template rendering module
+*/
 module.exports=(function(){
 	var $ 			= require('jquery'),
 		Mustache 	= require('mustache'),
 		export_ 	= {};
  
-
-
 	// ......
-	export_.renderSimpleTemplate = function(e){ 
-		$("document").ready(function() {
-			//get template html
-            var template = $("#tpl-mustache-simple").html(); 
-            //feed json data to the template
-            var result = Mustache.render(template, {
-                "item" : "Whisper 4000 in-home heater and dog walker",
-                "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
-                "price" : 895.99,
-                "inStock" : true,
-                "quantity" : 100
-            } );
-            //render the template html
-            $("#container1").html(result);
-        });
-	};
+	export_.renderSimpleTemplate = function(e){  
+		//get template html
+        var template = $("#tpl-mustache-simple").html(); 
+        //feed json data to the template
+        var result = Mustache.render(template, {
+            "item" : "Whisper 4000 in-home heater and dog walker",
+            "description" : "Walk your dog and heat your house at the same time? Now you can, with the Whisper 4000 Home Heating system / Dog Treadmill!",
+            "price" : 895.99,
+            "inStock" : true,
+            "quantity" : 100
+        });//Mustache.render
+        //render the template html
+        $("#container1").html(result); 
+	};//export_.renderSimpleTemplate
  
 
 
-	// ......
-	export_.renderSectionTemplate = function(e){ 
-		$("document").ready(function() {
-			//get template html
-            var template = $("#tpl-mustache-sections").html(); 
-            //feed json data to the template
-            var result = Mustache.render(template, {
-               "employees" : [{
-                  "name" : "Henry Handsome",
-                  "phone" : "+1-212-555-1234",
-                  "email" : "pensive@example.com",
-                  "title" : "Senior VP of Basketweaving",
-                  "fulltime" : true
-               }, {
-                  "name" : "Penelope Persistent",
-                  "phone" : "+1-212-555-8000",
-                  "email" : "truthful@example.com",
-                  "title" : "Principal Understudy",
-                  "fulltime" : false
-               }, {
-                  "name" : "Sam Serendipity",
-                  "phone" : "+1-212-555-9876",
-                  "email" : "helpful@example.com",
-                  "title" : "Chief Cook and Bottle Washer",
-                  "fulltime" : true
-               }, {
-                  "name" : "Tom Terriffic",
-                  "phone" : "+1-212-555-0011",
-                  "email" : "grumpy@example.com",
-                  "title" : "Janitor",
-                  "fulltime" : false
-               }]
-            });
+    // ......
+	export_.renderSectionTemplate = function(e){  
+		//get template html
+        var template = $("#tpl-mustache-sections").html(); 
+        //feed json data to the template
+        var result = Mustache.render(template, {
+            "employees" : [{
+              "name" : "Henry Handsome",
+              "phone" : "+1-212-555-1234",
+              "email" : "pensive@example.com",
+              "title" : "Senior VP of Basketweaving",
+              "fulltime" : true
+            }, {
+              "name" : "Penelope Persistent",
+              "phone" : "+1-212-555-8000",
+              "email" : "truthful@example.com",
+              "title" : "Principal Understudy",
+              "fulltime" : false
+            }, {
+              "name" : "Sam Serendipity",
+              "phone" : "+1-212-555-9876",
+              "email" : "helpful@example.com",
+              "title" : "Chief Cook and Bottle Washer",
+              "fulltime" : true
+            }, {
+              "name" : "Tom Terriffic",
+              "phone" : "+1-212-555-0011",
+              "email" : "grumpy@example.com",
+              "title" : "Janitor",
+              "fulltime" : false
+            }]
+        });//Mustache.render
 
-            //render the template html
-            $("#container2").html(result);
-        });
-	};
+        //render the template html
+        $("#container2").html(result); 
+	};//export_.renderSectionTemplate
  
 
 
-	// ......
+    // ......
 	export_.renderSection2Template = function(e){ 
         var template 	= $("#tpl-mustache-sections-conditions").html();
         var result 		= Mustache.render(template, {
@@ -918,11 +785,11 @@ module.exports=(function(){
                 "quantity" : 100
             } );
         $("#container3").html(result); 
-	};
+	};//export_.renderSection2Template
  
 
 
-	// ......
+    // ......
 	export_.renderFunctionsTemplate = function(e){ 
         var template = $("#tpl-mustache-functions").html();
         var prodData = {
@@ -946,18 +813,15 @@ module.exports=(function(){
 
         var result = Mustache.render(template, prodData );
         $("#container4").html(result);
-	};
-
-
-
-
-
-
-	return export_;
-
+	};//export_.renderFunctionsTemplate
  
+    return export_; 
 })();
-},{"jquery":25,"mustache":26}],6:[function(require,module,exports){
+},{"jquery":24,"mustache":25}],5:[function(require,module,exports){
+/**
+* Note: I've added the wrapper module.exports=(function() { ... return templates['precomp']; })();
+		to conviniently return the template precompiled
+*/
 module.exports=(function() {
 
 	var Handlebars 				= require('handlebars');
@@ -975,9 +839,9 @@ module.exports=(function() {
      
 	return templates['precomp']; 
 })();
-},{"handlebars":24}],7:[function(require,module,exports){
+},{"handlebars":23}],6:[function(require,module,exports){
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*
 
 Copyright (C) 2011 by Yehuda Katz
@@ -1342,7 +1206,7 @@ Handlebars.template = Handlebars.VM.template;
 })(Handlebars);
 ;
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 /*globals Handlebars: true */
 var Handlebars = require("./handlebars.runtime")["default"];
@@ -1382,7 +1246,7 @@ Handlebars.create = create;
 Handlebars['default'] = Handlebars;
 
 exports["default"] = Handlebars;
-},{"./handlebars.runtime":10,"./handlebars/compiler/ast":12,"./handlebars/compiler/base":13,"./handlebars/compiler/compiler":14,"./handlebars/compiler/javascript-compiler":16}],10:[function(require,module,exports){
+},{"./handlebars.runtime":9,"./handlebars/compiler/ast":11,"./handlebars/compiler/base":12,"./handlebars/compiler/compiler":13,"./handlebars/compiler/javascript-compiler":15}],9:[function(require,module,exports){
 "use strict";
 /*globals Handlebars: true */
 var base = require("./handlebars/base");
@@ -1418,7 +1282,7 @@ Handlebars.create = create;
 Handlebars['default'] = Handlebars;
 
 exports["default"] = Handlebars;
-},{"./handlebars/base":11,"./handlebars/exception":20,"./handlebars/runtime":21,"./handlebars/safe-string":22,"./handlebars/utils":23}],11:[function(require,module,exports){
+},{"./handlebars/base":10,"./handlebars/exception":19,"./handlebars/runtime":20,"./handlebars/safe-string":21,"./handlebars/utils":22}],10:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -1650,7 +1514,7 @@ var createFrame = function(object) {
   return frame;
 };
 exports.createFrame = createFrame;
-},{"./exception":20,"./utils":23}],12:[function(require,module,exports){
+},{"./exception":19,"./utils":22}],11:[function(require,module,exports){
 "use strict";
 var Exception = require("../exception")["default"];
 
@@ -1865,7 +1729,7 @@ var AST = {
 // Must be exported as an object rather than the root of the module as the jison lexer
 // most modify the object to operate properly.
 exports["default"] = AST;
-},{"../exception":20}],13:[function(require,module,exports){
+},{"../exception":19}],12:[function(require,module,exports){
 "use strict";
 var parser = require("./parser")["default"];
 var AST = require("./ast")["default"];
@@ -1887,7 +1751,7 @@ function parse(input) {
 }
 
 exports.parse = parse;
-},{"../utils":23,"./ast":12,"./helpers":15,"./parser":17}],14:[function(require,module,exports){
+},{"../utils":22,"./ast":11,"./helpers":14,"./parser":16}],13:[function(require,module,exports){
 "use strict";
 var Exception = require("../exception")["default"];
 var isArray = require("../utils").isArray;
@@ -2340,7 +2204,7 @@ exports.compile = compile;function argEquals(a, b) {
     return true;
   }
 }
-},{"../exception":20,"../utils":23}],15:[function(require,module,exports){
+},{"../exception":19,"../utils":22}],14:[function(require,module,exports){
 "use strict";
 var Exception = require("../exception")["default"];
 
@@ -2528,7 +2392,7 @@ function omitLeft(statements, i, multiple) {
   current.leftStripped = current.string !== original;
   return current.leftStripped;
 }
-},{"../exception":20}],16:[function(require,module,exports){
+},{"../exception":19}],15:[function(require,module,exports){
 "use strict";
 var COMPILER_REVISION = require("../base").COMPILER_REVISION;
 var REVISION_CHANGES = require("../base").REVISION_CHANGES;
@@ -3493,7 +3357,7 @@ JavaScriptCompiler.isValidJavaScriptVariableName = function(name) {
 };
 
 exports["default"] = JavaScriptCompiler;
-},{"../base":11,"../exception":20}],17:[function(require,module,exports){
+},{"../base":10,"../exception":19}],16:[function(require,module,exports){
 "use strict";
 /* jshint ignore:start */
 /* istanbul ignore next */
@@ -3994,7 +3858,7 @@ function Parser () { this.yy = {}; }Parser.prototype = parser;parser.Parser = Pa
 return new Parser;
 })();exports["default"] = handlebars;
 /* jshint ignore:end */
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 "use strict";
 var Visitor = require("./visitor")["default"];
 
@@ -4136,7 +4000,7 @@ PrintVisitor.prototype.content = function(content) {
 PrintVisitor.prototype.comment = function(comment) {
   return this.pad("{{! '" + comment.comment + "' }}");
 };
-},{"./visitor":19}],19:[function(require,module,exports){
+},{"./visitor":18}],18:[function(require,module,exports){
 "use strict";
 function Visitor() {}
 
@@ -4149,7 +4013,7 @@ Visitor.prototype = {
 };
 
 exports["default"] = Visitor;
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 "use strict";
 
 var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
@@ -4178,7 +4042,7 @@ function Exception(message, node) {
 Exception.prototype = new Error();
 
 exports["default"] = Exception;
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -4372,7 +4236,7 @@ exports.noop = noop;function initData(context, data) {
   }
   return data;
 }
-},{"./base":11,"./exception":20,"./utils":23}],22:[function(require,module,exports){
+},{"./base":10,"./exception":19,"./utils":22}],21:[function(require,module,exports){
 "use strict";
 // Build out our basic SafeString type
 function SafeString(string) {
@@ -4384,7 +4248,7 @@ SafeString.prototype.toString = function() {
 };
 
 exports["default"] = SafeString;
-},{}],23:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 "use strict";
 /*jshint -W004 */
 var SafeString = require("./safe-string")["default"];
@@ -4473,7 +4337,7 @@ exports.isEmpty = isEmpty;function appendContextPath(contextPath, id) {
 }
 
 exports.appendContextPath = appendContextPath;
-},{"./safe-string":22}],24:[function(require,module,exports){
+},{"./safe-string":21}],23:[function(require,module,exports){
 // USAGE:
 // var handlebars = require('handlebars');
 
@@ -4501,7 +4365,7 @@ if (typeof require !== 'undefined' && require.extensions) {
   require.extensions[".hbs"] = extension;
 }
 
-},{"../dist/cjs/handlebars":9,"../dist/cjs/handlebars/compiler/printer":18,"../dist/cjs/handlebars/compiler/visitor":19,"fs":7}],25:[function(require,module,exports){
+},{"../dist/cjs/handlebars":8,"../dist/cjs/handlebars/compiler/printer":17,"../dist/cjs/handlebars/compiler/visitor":18,"fs":6}],24:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
@@ -14243,7 +14107,7 @@ return jQuery;
 
 
 
-},{}],26:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /*!
  * mustache.js - Logic-less {{mustache}} templates with JavaScript
  * http://github.com/janl/mustache.js
@@ -14815,4 +14679,4 @@ return jQuery;
 
 }));
 
-},{}]},{},[2])
+},{}]},{},[1])
